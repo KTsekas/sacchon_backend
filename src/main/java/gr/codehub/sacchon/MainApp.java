@@ -1,52 +1,74 @@
 package gr.codehub.sacchon;
 
 import gr.codehub.sacchon.jpautil.JpaUtil;
-import gr.codehub.sacchon.model.Doctor;
-import gr.codehub.sacchon.model.Patient;
+import gr.codehub.sacchon.model.UserRole;
+import gr.codehub.sacchon.routers.AuthRouter;
+import gr.codehub.sacchon.routers.DoctorRouter;
+import gr.codehub.sacchon.routers.PatientRouter;
+import gr.codehub.sacchon.security.RoleVerifier;
+import org.restlet.Application;
+import org.restlet.Component;
+import org.restlet.Restlet;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.data.Protocol;
+import org.restlet.engine.Engine;
+import org.restlet.routing.Router;
+import org.restlet.security.ChallengeAuthenticator;
 
 import javax.persistence.EntityManager;
+import java.util.logging.Logger;
 
-public class MainApp {
-    public static void main(String[] args) {
-
+public class MainApp extends Application {
+    public static final Logger LOGGER = Engine.getLogger(MainApp.class);
+    public static void main(String[] args) throws Exception {
         EntityManager em = JpaUtil.getEntityManager();
-//        Patient pt = new Patient();
-//        pt.setFirstName("vaggelis");
-//        pt.setEmail("vaggelakis5@gmail.com");
-//        pt.setPassword("");
-//        Doctor doc = new Doctor();
-//
-//        doc.setFirstName("doctor vaggelis");
-//        doc.setEmail("vaggelai2kis@gmail.com");
-//        doc.setPassword("");
-//        pt.setDoctor(doc);
-//        em.getTransaction().begin();
-//        em.persist(pt);
-//        em.persist(doc);
-//        em.getTransaction().commit();
-//        for(int i=0;i<10;i++){
-//            Patient patient = em.find(Patient.class,i);
-//            if( patient==null)
-//                continue;
-//            System.out.println(patient);
-//            System.out.println(patient.getDoctor());
-//        }
-//        em.getTransaction().begin();
-//        Reporter rep = new Reporter();
-//        rep.setFirstName("vaggelakis");
-//        rep.setEmail("reporter@vgaggelis.com");
-//        rep.setPassword("pwd");
-//        em.persist(rep);
-//        em.getTransaction().commit();
-//        System.out.println(rep);
-//        em.close();
-        em.getTransaction().begin();
-        Doctor doc = em.createQuery("from Doctor where email=?1",Doctor.class).setParameter(1,"vaggelai2kis@gmail.com").getSingleResult();
-        Patient p = em.createQuery("from Patient where doctor=?1",Patient.class).setParameter(1,doc).getSingleResult();
-        em.getTransaction().commit();
-        System.out.println(doc.getFirstName());
-        System.out.println(p.getFirstName());
+        Component c = new Component();
+
+        c.getServers().add(Protocol.HTTP,"localhost", 9000);
+        c.getDefaultHost().attach("/api", new MainApp());
+        c.start();
+
+        LOGGER.info("Sample Web API started");
+        LOGGER.info(String.format("URL: http://%s:%d",
+                c.getServers().get(0).getAddress(),
+                c.getServers().get(0).getPort()));
     }
 
+    private ChallengeAuthenticator getRoleGuard(Router router,String role){
+        ChallengeAuthenticator guard = new ChallengeAuthenticator(this.getContext(), ChallengeScheme.HTTP_BASIC,"sacchon");
+        guard.setVerifier( new RoleVerifier(this,role));
+        guard.setNext(router);
+        return guard;
+    }
+
+    @Override
+    public Restlet createInboundRoot() {
+        AuthRouter auth = new AuthRouter();
+        PatientRouter patient = new PatientRouter();
+        DoctorRouter doctor = new DoctorRouter();
+        Router router = new Router();
+
+
+        router.attach("/auth",auth);
+        router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));
+        router.attach("/doctor",getRoleGuard(doctor,UserRole.DOCTOR));
+//        CustomRouter customRouter = new CustomRouter(this);
+//        Shield shield = new Shield(this);
+//
+//        Router publicRouter = customRouter.publicResources();
+//        ChallengeAuthenticator apiGuard = shield.createApiGuard();
+//        // Create the api router, protected by a guard
+//
+//        Router apiRouter = customRouter.protectedResources();
+//        apiGuard.setNext(apiRouter);
+//
+//        publicRouter.attachDefault(apiGuard);
+//
+//        // return publicRouter;
+//
+//        CorsFilter corsFilter = new CorsFilter(this);
+//        return corsFilter.createCorsFilter(publicRouter);
+        return router;
+    }
 
 }

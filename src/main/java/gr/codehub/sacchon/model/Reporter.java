@@ -11,5 +11,4 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue(UserRole.REPORTER)
 public class Reporter extends User{
-
 }

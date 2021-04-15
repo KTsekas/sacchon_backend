@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(UserRole.DOCTOR)
 public class Doctor extends User {
+
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
     List<Consultation> consultations;
 

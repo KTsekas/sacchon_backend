@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="Users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="role",discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="role",discriminatorType = DiscriminatorType.STRING)
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class User {
     private String lastName;
 
     @Column(name="role",insertable = false,updatable = false)
-    private int role;
+    private String role;
 
     @Column(unique = true,nullable = false)
     private String email;
