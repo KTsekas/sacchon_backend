@@ -11,15 +11,21 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import java.util.regex.Pattern;
+
 public class SignUpResource extends ServerResource {
+    public static final Pattern EMAIL_CHECKER = Pattern.compile("(.+)@(.+)");
+    public static final Pattern PASSWORD_CHECKER = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 
     UserRepository repo;
 
     public boolean isValidPassword(String password){
-        return true;
+        return PASSWORD_CHECKER.matcher(password).matches();
     }
+
     public boolean canUseUsername(String username){
-        return repo.getUser(username) == null;
+        // simplest email checker ever created
+        return EMAIL_CHECKER.matcher(username).matches() && repo.getUser(username) == null;
     }
 
     @Post("json")
@@ -35,7 +41,7 @@ public class SignUpResource extends ServerResource {
         repo = new UserRepository(JpaUtil.getEntityManager());
         if (!canUseUsername(frm.getEmail()))
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,
-                    "account already exists");
+                    "account already exists or invalid username");
         // finally we can make user
         User usr = frm.createUser();
         usr = repo.save(usr);
