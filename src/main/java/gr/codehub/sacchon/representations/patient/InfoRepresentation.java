@@ -4,14 +4,14 @@ import gr.codehub.sacchon.model.Patient;
 import lombok.Data;
 
 @Data
-public class PatientInfoRepresentation {
+public class InfoRepresentation {
     private String firstName;
     private String lastName;
     private String doctorName;
     private String doctorUrl;
 
 
-    public PatientInfoRepresentation(Patient p){
+    public InfoRepresentation(Patient p){
         if( p == null )
             return;
         this.firstName=p.getFirstName();

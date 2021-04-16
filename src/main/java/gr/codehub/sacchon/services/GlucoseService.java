@@ -1,27 +1,18 @@
 package gr.codehub.sacchon.services;
 
-import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.util.JpaUtil;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class GlucoseService {
+public class GlucoseService extends BaseService{
 
     private Patient patient;
-    private EntityManager em;
 
     public GlucoseService(Patient patient) {
         this.patient = patient;
-        this.em = JpaUtil.getEntityManager();
-    }
-
-    public void close() {
-        this.em.close();
     }
 
     public Optional<GlucoseRecord> get(int id) {
@@ -34,7 +25,10 @@ public class GlucoseService {
             return false;
         try {
             em.getTransaction().begin();
-            em.remove(rec.get());
+            em.createQuery("delete from GlucoseRecord where patient=?1 and id=?2")
+                    .setParameter(1,patient)
+                    .setParameter(2,id)
+                    .executeUpdate();
             em.getTransaction().commit();
             return true;
         } catch (Exception ex) {
@@ -65,8 +59,9 @@ public class GlucoseService {
         }
     }
     @SuppressWarnings("all")
-    public List<CarbRecord> getList(int offset, int limit) {
+    public List<GlucoseRecord> getList(int offset, int limit) {
         return em.createQuery("from GlucoseRecord where patient=?1")
+                .setParameter(1,patient)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();

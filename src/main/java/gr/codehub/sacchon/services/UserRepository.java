@@ -29,5 +29,6 @@ public class UserRepository extends Repository<User,Integer> {
         }catch(NoResultException ex){
             return null;
         }
+
     }
 }

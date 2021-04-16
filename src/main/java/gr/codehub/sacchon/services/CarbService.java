@@ -2,25 +2,17 @@ package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.util.JpaUtil;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class CarbService {
+public class CarbService extends BaseService {
 
     private Patient patient;
-    private EntityManager em;
 
     public CarbService(Patient patient) {
         this.patient = patient;
-        this.em = JpaUtil.getEntityManager();
-    }
-
-    public void close() {
-        this.em.close();
     }
 
     public Optional<CarbRecord> get(int id) {
@@ -34,6 +26,10 @@ public class CarbService {
         try {
             em.getTransaction().begin();
             em.remove(rec.get());
+            em.createQuery("delete from CarbRecord where patient=?1 and id=?2")
+                    .setParameter(1,patient)
+                    .setParameter(2,id)
+                    .executeUpdate();
             em.getTransaction().commit();
             return true;
         } catch (Exception ex) {
@@ -67,10 +63,12 @@ public class CarbService {
     @SuppressWarnings("all")
     public List<CarbRecord> getList(int offset, int limit) {
         return em.createQuery("from CarbRecord where patient=?1")
+                .setParameter(1,patient)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
     }
+
     public double getAverage(LocalDate start, LocalDate end) {
         try {
             return (Double) em.createQuery("select avg(c.carbIntake) from CarbRecord g where c.patient is ?3 and c.dateCreated between ?1 and ?2")

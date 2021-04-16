@@ -28,4 +28,7 @@ public class DateHelper {
     public static LocalDateTime getLocalDateTimeFromUTC(long epochMilli){
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), ZoneId.systemDefault());
     }
+    public static long getUTCFromLocalDateTime(LocalDateTime dt){
+        return dt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
 }
