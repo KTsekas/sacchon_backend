@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class PatientCarbListRepresentation {
-    List<PatientCarbRepresentation> records;
+    List<CarbRepresentation> records;
     int count;
 
     public PatientCarbListRepresentation(List<CarbRecord> list, int count){
@@ -18,6 +18,6 @@ public class PatientCarbListRepresentation {
         if ( list == null )
             this.records = new ArrayList<>();
         else
-            this.records = list.stream().map(PatientCarbRepresentation::new).collect(Collectors.toList());
+            this.records = list.stream().map(CarbRepresentation::new).collect(Collectors.toList());
     }
 }

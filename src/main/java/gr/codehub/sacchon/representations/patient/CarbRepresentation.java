@@ -4,13 +4,13 @@ import gr.codehub.sacchon.model.CarbRecord;
 import lombok.Data;
 
 @Data
-public class PatientCarbRepresentation {
+public class CarbRepresentation {
 
     private int id;
     private double glucoseLevel;
     private String date;
 
-    public PatientCarbRepresentation(CarbRecord record){
+    public CarbRepresentation(CarbRecord record){
         if( record == null)
             return;
         this.id = record.getId();
