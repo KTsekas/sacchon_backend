@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="basic auth implemented with role verifier">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/LoginFormRepresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/LoginRepresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" afterDir="false" />
+    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="login resource progress">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/PatientInfoRepresentation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/AuthRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/AuthRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/LoginRepresentation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/LoginRepresentation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientInfoResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +31,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="chris" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -104,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618520159317</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="login resource progress">
+      <created>1618557551216</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618557551216</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,11 +162,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="basic auth implemented with role verifier" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic auth implemented with role verifier" />
+    <MESSAGE value="login resource progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="login resource progress" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="gr.codehub.sacchon.repository.UserRepository" memberName="em" />
         <PinnedItemInfo parentTag="gr.codehub.sacchon.PatientResource" memberName="context" />
       </pinned-members>
     </pin-to-top-manager>

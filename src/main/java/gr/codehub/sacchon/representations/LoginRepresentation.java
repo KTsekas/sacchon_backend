@@ -20,7 +20,7 @@ public class LoginRepresentation {
         this.lastName=user.getLastName();
         this.email = user.getEmail();
         this.role = user.getRole();
-        this.authToken = Base64.getEncoder().encodeToString((user.getFirstName() +": " + user.getPassword()).getBytes());
+        this.authToken = Base64.getEncoder().encodeToString((user.getEmail() +":" + user.getPassword()).getBytes());
     }
 
 }

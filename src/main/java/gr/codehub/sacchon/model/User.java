@@ -25,5 +25,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    public String getFullName() {
+        return this.firstName + " " +this.lastName;
+    }
+
 
 }

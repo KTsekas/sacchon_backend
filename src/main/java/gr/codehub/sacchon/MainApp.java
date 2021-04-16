@@ -49,6 +49,7 @@ public class MainApp extends Application {
         Router router = new Router();
 
         auth.setupEndPoints();
+        patient.setupEndPoints();
 
         router.attach("/auth",auth);
         router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));
