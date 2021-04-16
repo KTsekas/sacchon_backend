@@ -5,11 +5,10 @@ import lombok.Data;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Optional;
 
 @Data
 public class GlucoseFormRepresentation {
-    private Optional<Integer> id;
+    private int id=-1;
     private double glucoseLevel;
     private long dateTime;
 

@@ -13,6 +13,7 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
 import org.restlet.routing.Router;
+import org.restlet.routing.Template;
 import org.restlet.security.ChallengeAuthenticator;
 
 import javax.persistence.EntityManager;
@@ -47,6 +48,7 @@ public class MainApp extends Application {
         PatientRouter patient = new PatientRouter();
         DoctorRouter doctor = new DoctorRouter();
         Router router = new Router();
+        router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
 
         auth.setupEndPoints();
         patient.setupEndPoints();
@@ -54,20 +56,6 @@ public class MainApp extends Application {
         router.attach("/auth",auth);
         router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));
         router.attach("/doctor",getRoleGuard(doctor,UserRole.DOCTOR));
-//        CustomRouter customRouter = new CustomRouter(this);
-//        Shield shield = new Shield(this);
-//
-//        Router publicRouter = customRouter.publicResources();
-//        ChallengeAuthenticator apiGuard = shield.createApiGuard();
-//        // Create the api router, protected by a guard
-//
-//        Router apiRouter = customRouter.protectedResources();
-//        apiGuard.setNext(apiRouter);
-//
-//        publicRouter.attachDefault(apiGuard);
-//
-//        // return publicRouter;
-//
 //        CorsFilter corsFilter = new CorsFilter(this);
 //        return corsFilter.createCorsFilter(publicRouter);
         patient.getRoutes().forEach(System.out::println);

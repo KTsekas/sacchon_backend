@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.representations;
+package gr.codehub.sacchon.representations.patient;
 
 import gr.codehub.sacchon.model.GlucoseRecord;
 import lombok.Data;
