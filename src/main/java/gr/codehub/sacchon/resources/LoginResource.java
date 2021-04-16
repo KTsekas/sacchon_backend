@@ -3,7 +3,7 @@ package gr.codehub.sacchon.resources;
 import gr.codehub.sacchon.jpautil.JpaUtil;
 import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.repository.UserRepository;
-import gr.codehub.sacchon.representations.forms.LoginFormRepresentation;
+import gr.codehub.sacchon.representations.forms.LoginForm;
 import gr.codehub.sacchon.representations.LoginRepresentation;
 import org.restlet.data.Status;
 import org.restlet.resource.Post;
@@ -16,7 +16,7 @@ public class LoginResource extends ServerResource {
     private String password;
 
     @Post("json")
-    public LoginRepresentation doLogin(LoginFormRepresentation repr){
+    public LoginRepresentation doLogin(LoginForm repr){
         UserRepository repo = new UserRepository(JpaUtil.getEntityManager());
         User usr = repo.getUser(repr.getUsername());
         if( usr == null )

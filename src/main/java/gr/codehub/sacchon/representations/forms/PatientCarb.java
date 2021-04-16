@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @Data
-public class PatientCarbFormRepresentation {
+public class PatientCarb {
     private int id=-1;
     private double carbIntake;
     private String date;

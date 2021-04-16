@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Data
-public class GlucoseFormRepresentation {
+public class GlucoseForm {
     private int id=-1;
     private double glucoseLevel;
     private long dateTime;

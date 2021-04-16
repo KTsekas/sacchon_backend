@@ -11,6 +11,10 @@ public abstract class Repository<T,K> {
         this.entityManager = entityManager;
     }
 
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
     //Create , insert
     public T save(T t){
         try {
@@ -28,8 +32,7 @@ public abstract class Repository<T,K> {
     public abstract String getClassName();
     // Read select
     public T read(K id){
-        T t = entityManager.find(getEntityClass(), id);
-        return t;
+        return entityManager.find(getEntityClass(), id);
     }
 
     public List<T> findAll(){

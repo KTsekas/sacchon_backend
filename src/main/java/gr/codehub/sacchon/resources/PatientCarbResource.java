@@ -4,7 +4,7 @@ import gr.codehub.sacchon.jpautil.JpaUtil;
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.repository.PatientCarbRepository;
-import gr.codehub.sacchon.representations.forms.PatientCarbFormRepresentation;
+import gr.codehub.sacchon.representations.forms.PatientCarb;
 import org.restlet.data.Status;
 import org.restlet.resource.Delete;
 import org.restlet.resource.Post;
@@ -15,13 +15,11 @@ import java.time.LocalDate;
 
 public class PatientCarbResource extends AuthResource {
 
-
     @Post("json")
-    public void insert(PatientCarbFormRepresentation repr){
+    public void insert(PatientCarb repr){
         if ( repr == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientCarbRepository repo = new PatientCarbRepository(JpaUtil.getEntityManager());
-
         CarbRecord record = new CarbRecord();
         record.setPatient((Patient)this.getUser());
         record.setCarbIntake(repr.getCarbIntake());
@@ -34,7 +32,7 @@ public class PatientCarbResource extends AuthResource {
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"unable to save record in database");
     }
     @Put("json")
-    public void update(PatientCarbFormRepresentation repr){
+    public void update(PatientCarb repr){
         if ( repr == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientCarbRepository repo = new PatientCarbRepository(JpaUtil.getEntityManager());

@@ -4,7 +4,7 @@ import gr.codehub.sacchon.jpautil.JpaUtil;
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.repository.PatientGlucoseRepository;
-import gr.codehub.sacchon.representations.forms.GlucoseFormRepresentation;
+import gr.codehub.sacchon.representations.forms.GlucoseForm;
 import org.restlet.data.Status;
 import org.restlet.resource.Delete;
 import org.restlet.resource.Post;
@@ -15,7 +15,7 @@ public class PatientGlucoseResource extends AuthResource {
 
 
     @Post("json")
-    public void insert(GlucoseFormRepresentation repr){
+    public void insert(GlucoseForm repr){
         if ( repr == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientGlucoseRepository repo = new PatientGlucoseRepository(JpaUtil.getEntityManager());
@@ -31,7 +31,7 @@ public class PatientGlucoseResource extends AuthResource {
         }
     }
     @Put("json")
-    public void update(GlucoseFormRepresentation repr){
+    public void update(GlucoseForm repr){
         if ( repr == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientGlucoseRepository repo = new PatientGlucoseRepository(JpaUtil.getEntityManager());

@@ -7,5 +7,7 @@ public class UserRole {
 
     private UserRole(){}
 
-
+    public static boolean isValidSignUpRole(String name){
+        return name.equals(PATIENT) || name.equals(DOCTOR);
+    }
 }
