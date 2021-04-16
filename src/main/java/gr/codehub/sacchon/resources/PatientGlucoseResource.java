@@ -15,15 +15,16 @@ public class PatientGlucoseResource extends AuthResource {
 
 
     @Post("json")
-    public void insert(GlucoseForm repr){
-        if ( repr == null )
+    public void insert(GlucoseForm frm){
+        if ( frm == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
+
         PatientGlucoseRepository repo = new PatientGlucoseRepository(JpaUtil.getEntityManager());
 
         GlucoseRecord record = new GlucoseRecord();
         record.setPatient((Patient)this.getUser());
-        record.setGlucoseLevel(repr.getGlucoseLevel());
-        record.setDate(repr.getLocalDateTime());
+        record.setGlucoseLevel(frm.getGlucoseLevel());
+        record.setDate(frm.getLocalDateTime());
 
         record = repo.save(record);
         if ( record  == null) {
@@ -31,17 +32,17 @@ public class PatientGlucoseResource extends AuthResource {
         }
     }
     @Put("json")
-    public void update(GlucoseForm repr){
-        if ( repr == null )
+    public void update(GlucoseForm frm){
+        if ( frm == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientGlucoseRepository repo = new PatientGlucoseRepository(JpaUtil.getEntityManager());
-        if ( repr.getId()==-1 )
+        if ( frm.getId()==GlucoseForm.MISSING_ID_VALUE )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"Id field missing from form");
-        GlucoseRecord record = repo.read(repr.getId());
+        GlucoseRecord record = repo.read(frm.getId());
         if( record == null )
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND,"no record found with this id");
-        record.setGlucoseLevel(repr.getGlucoseLevel());
-        record.setDate(repr.getLocalDateTime());
+        record.setGlucoseLevel(frm.getGlucoseLevel());
+        record.setDate(frm.getLocalDateTime());
         record = repo.update(record);
         if ( record == null )
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"unable to update record in database");

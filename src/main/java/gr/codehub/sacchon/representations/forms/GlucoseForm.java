@@ -8,7 +8,8 @@ import java.time.ZoneId;
 
 @Data
 public class GlucoseForm {
-    private int id=-1;
+    public static final int MISSING_ID_VALUE=-1;
+    private int id=MISSING_ID_VALUE;
     private double glucoseLevel;
     private long dateTime;
 

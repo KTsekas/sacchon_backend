@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="Form refactoring ( removed the representation part of names cause it was geting crazy )&#10;Added sign up resource">
+    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="Basic validation for sign up form data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/SignUpResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/SignUpResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/UserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/repository/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/repository/Repository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/PatientCarb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618579590178</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Basic validation for sign up form data">
+      <created>1618581158722</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1618581158722</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,7 +198,8 @@
     <MESSAGE value="glucose and glucose list resources" />
     <MESSAGE value="carb resource" />
     <MESSAGE value="Form refactoring ( removed the representation part of names cause it was geting crazy )&#10;Added sign up resource" />
-    <option name="LAST_COMMIT_MESSAGE" value="Form refactoring ( removed the representation part of names cause it was geting crazy )&#10;Added sign up resource" />
+    <MESSAGE value="Basic validation for sign up form data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic validation for sign up form data" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -16,12 +16,12 @@ public class LoginResource extends ServerResource {
     private String password;
 
     @Post("json")
-    public LoginRepresentation doLogin(LoginForm repr){
+    public LoginRepresentation doLogin(LoginForm frm){
         UserRepository repo = new UserRepository(JpaUtil.getEntityManager());
-        User usr = repo.getUser(repr.getUsername());
+        User usr = repo.getUser(frm.getUsername());
         if( usr == null )
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND,"No user associated with that email");
-        if ( !usr.getPassword().equals(repr.getPassword()))
+        if ( !usr.getPassword().equals(frm.getPassword()))
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND,"Invalid username or password");
         return new LoginRepresentation(usr);
     }

@@ -4,7 +4,7 @@ import gr.codehub.sacchon.jpautil.JpaUtil;
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.repository.PatientCarbRepository;
-import gr.codehub.sacchon.representations.forms.PatientCarb;
+import gr.codehub.sacchon.representations.forms.CarbForm;
 import org.restlet.data.Status;
 import org.restlet.resource.Delete;
 import org.restlet.resource.Post;
@@ -16,14 +16,14 @@ import java.time.LocalDate;
 public class PatientCarbResource extends AuthResource {
 
     @Post("json")
-    public void insert(PatientCarb repr){
-        if ( repr == null )
+    public void insert(CarbForm frm){
+        if ( frm == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientCarbRepository repo = new PatientCarbRepository(JpaUtil.getEntityManager());
         CarbRecord record = new CarbRecord();
         record.setPatient((Patient)this.getUser());
-        record.setCarbIntake(repr.getCarbIntake());
-        LocalDate date = repr.getLocalDate();
+        record.setCarbIntake(frm.getCarbIntake());
+        LocalDate date = frm.getLocalDate();
         if (date == null )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"invalid date format in body");
         record.setDate(date);
@@ -32,17 +32,17 @@ public class PatientCarbResource extends AuthResource {
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"unable to save record in database");
     }
     @Put("json")
-    public void update(PatientCarb repr){
-        if ( repr == null )
+    public void update(CarbForm frm){
+        if ( frm == null )
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"This request needs a body");
         PatientCarbRepository repo = new PatientCarbRepository(JpaUtil.getEntityManager());
-        if ( repr.getId() == -1 )
+        if ( frm.getId() == CarbForm.MISSING_ID_VALUE )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"Id field missing from form");
-        CarbRecord record = repo.read(repr.getId());
+        CarbRecord record = repo.read(frm.getId());
         if( record == null )
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND,"no record found with this id");
-        record.setCarbIntake(repr.getCarbIntake());
-        LocalDate date = repr.getLocalDate();
+        record.setCarbIntake(frm.getCarbIntake());
+        LocalDate date = frm.getLocalDate();
         if (date == null )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"invalid date format in body");
         record.setDate(date);
@@ -57,7 +57,7 @@ public class PatientCarbResource extends AuthResource {
             id = Integer.parseInt(this.getAttribute("id"));
         }
         catch(NumberFormatException ex ){
-            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"invalid or not id provided");
+            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"invalid id attribute");
         }
         PatientCarbRepository repo = new PatientCarbRepository(JpaUtil.getEntityManager());
         if (!repo.delete(id))

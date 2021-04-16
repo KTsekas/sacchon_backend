@@ -7,8 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @Data
-public class PatientCarb {
-    private int id=-1;
+public class CarbForm {
+    public static final int MISSING_ID_VALUE=-1;
+    private int id=MISSING_ID_VALUE;
     private double carbIntake;
     private String date;
 
