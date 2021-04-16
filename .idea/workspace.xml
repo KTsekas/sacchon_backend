@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="login resource done&#10;patient resources steps">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/PatientGlucoseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/PatientGlucoseListRepresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/PatientGlucoseRepresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseListResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Consultation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/GlucoseRecords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/GlucoseRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/LoginFormRepresentation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/LoginFormRepresentation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" afterDir="false" />
+    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="glucose and glucose list resources">
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/Consultation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/Consultation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/model/User.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618559727662</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="glucose and glucose list resources">
+      <created>1618567882210</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618567882210</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -179,7 +168,8 @@
     <MESSAGE value="basic auth implemented with role verifier" />
     <MESSAGE value="login resource progress" />
     <MESSAGE value="login resource done&#10;patient resources steps" />
-    <option name="LAST_COMMIT_MESSAGE" value="login resource done&#10;patient resources steps" />
+    <MESSAGE value="glucose and glucose list resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="glucose and glucose list resources" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
