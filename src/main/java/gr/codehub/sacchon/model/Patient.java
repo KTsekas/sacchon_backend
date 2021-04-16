@@ -19,10 +19,10 @@ public class Patient extends User{
     private List<Consultation> consultations;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CarbRecords> carbs;
+    private List<CarbRecord> carbs;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<GlucoseRecords> glucoseLevels;
+    private List<GlucoseRecord> glucoseLevels;
 
     @Override
     public String toString() {

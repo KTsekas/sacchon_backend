@@ -70,6 +70,7 @@ public class MainApp extends Application {
 //
 //        CorsFilter corsFilter = new CorsFilter(this);
 //        return corsFilter.createCorsFilter(publicRouter);
+        patient.getRoutes().forEach(System.out::println);
         return router;
     }
 

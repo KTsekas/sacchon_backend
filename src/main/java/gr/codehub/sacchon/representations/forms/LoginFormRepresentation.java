@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.representations;
+package gr.codehub.sacchon.representations.forms;
 
 
 import lombok.Data;

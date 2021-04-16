@@ -3,7 +3,7 @@ package gr.codehub.sacchon.resources;
 import gr.codehub.sacchon.jpautil.JpaUtil;
 import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.repository.UserRepository;
-import gr.codehub.sacchon.representations.LoginFormRepresentation;
+import gr.codehub.sacchon.representations.forms.LoginFormRepresentation;
 import gr.codehub.sacchon.representations.LoginRepresentation;
 import org.restlet.data.Status;
 import org.restlet.resource.Post;

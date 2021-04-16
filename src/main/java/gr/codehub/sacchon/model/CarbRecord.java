@@ -7,13 +7,14 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-public class CarbRecords {
+public class CarbRecord {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Patient patient;
     private double carbIntake;
+
     private LocalDate date;
 }
