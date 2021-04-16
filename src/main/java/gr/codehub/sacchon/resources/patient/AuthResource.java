@@ -1,7 +1,7 @@
-package gr.codehub.sacchon.resources;
+package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.User;
-import gr.codehub.sacchon.security.RoleVerifier;
+import org.restlet.Context;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -9,11 +9,13 @@ import org.restlet.resource.ServerResource;
 public class AuthResource extends ServerResource {
     private User authenticatedUser;
 
-
     @Override
     protected void doInit() throws ResourceException {
         super.doInit();
-        this.authenticatedUser = (User) getApplication().getContext().getAttributes().get(RoleVerifier.USER_ATTRIBUTE);
+        Context ctx  = getApplication().getContext();
+        String id = getRequest().getClientInfo().getUser().getIdentifier();
+        this.authenticatedUser = (User) ctx.getAttributes().get(id);
+        ctx.getAttributes().remove(id);
         if( this.authenticatedUser == null ){
             throw new ResourceException(Status.CLIENT_ERROR_UNAUTHORIZED);
         }

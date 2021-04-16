@@ -1,6 +1,6 @@
 package gr.codehub.sacchon;
 
-import gr.codehub.sacchon.jpautil.JpaUtil;
+import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.UserRole;
 import gr.codehub.sacchon.routers.AuthRouter;
 import gr.codehub.sacchon.routers.DoctorRouter;
@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 public class MainApp extends Application {
     public static final Logger LOGGER = Engine.getLogger(MainApp.class);
+
     public static void main(String[] args) throws Exception {
         EntityManager em = JpaUtil.getEntityManager();
         Component c = new Component();
@@ -52,6 +53,7 @@ public class MainApp extends Application {
 
         auth.setupEndPoints();
         patient.setupEndPoints();
+
 
         router.attach("/auth",auth);
         router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));

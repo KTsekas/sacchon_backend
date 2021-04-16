@@ -4,13 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="Basic validation for sign up form data">
+    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="naming conventions cleanup">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/AvgRepresentation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/AvgForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/AvgCarbResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/CarbService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/GlucoseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/PatientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/util/DateHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/jpautil/JpaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/util/JpaUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/GlucoseRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/GlucoseRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/PatientCarbRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/PatientGlucoseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/PatientCarb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientCarbRepresentation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientCarbRepresentation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/AuthResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/AuthResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/LoginResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbListResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbListResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientCarbResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseListResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientGlucoseResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/GlucoseResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/PatientInfoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/InfoResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/SignUpResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/SignUpResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/repository/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/repository/Repository.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +72,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="JavaMethodFindUsagesOptions.isOverridingMethods" value="true" />
+    <property name="JavaMethodFindUsagesOptions.isSearchForTextOccurrences" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -61,6 +89,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IDEA_Projects\SacchonBackend" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gr.codehub.sacchon.services" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -68,7 +99,7 @@
       <module name="sacchon_backend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gr.codehub.sacchon.resources.*" />
+          <option name="PATTERN" value="gr.codehub.sacchon.resources.patient.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618581158722</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="naming conventions cleanup">
+      <created>1618583060617</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1618583060617</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,7 +237,8 @@
     <MESSAGE value="carb resource" />
     <MESSAGE value="Form refactoring ( removed the representation part of names cause it was geting crazy )&#10;Added sign up resource" />
     <MESSAGE value="Basic validation for sign up form data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic validation for sign up form data" />
+    <MESSAGE value="naming conventions cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="naming conventions cleanup" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -208,6 +247,12 @@
         <PinnedItemInfo parentTag="gr.codehub.sacchon.PatientResource" memberName="context" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="patient" />
+        <watch expression="patient" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sacchon_backend$MainApp.ic" NAME="MainApp Coverage Results" MODIFIED="1618519248922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

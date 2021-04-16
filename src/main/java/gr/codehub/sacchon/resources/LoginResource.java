@@ -1,8 +1,8 @@
 package gr.codehub.sacchon.resources;
 
-import gr.codehub.sacchon.jpautil.JpaUtil;
+import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.User;
-import gr.codehub.sacchon.repository.UserRepository;
+import gr.codehub.sacchon.services.UserRepository;
 import gr.codehub.sacchon.representations.forms.LoginForm;
 import gr.codehub.sacchon.representations.LoginRepresentation;
 import org.restlet.data.Status;

@@ -1,9 +1,9 @@
-package gr.codehub.sacchon.resources;
+package gr.codehub.sacchon.resources.patient;
 
-import gr.codehub.sacchon.jpautil.JpaUtil;
+import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.repository.PatientCarbRepository;
+import gr.codehub.sacchon.services.PatientCarbRepository;
 import gr.codehub.sacchon.representations.forms.CarbForm;
 import org.restlet.data.Status;
 import org.restlet.resource.Delete;
@@ -13,7 +13,7 @@ import org.restlet.resource.ResourceException;
 
 import java.time.LocalDate;
 
-public class PatientCarbResource extends AuthResource {
+public class CarbResource extends AuthResource {
 
     @Post("json")
     public void insert(CarbForm frm){
@@ -26,7 +26,7 @@ public class PatientCarbResource extends AuthResource {
         LocalDate date = frm.getLocalDate();
         if (date == null )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"invalid date format in body");
-        record.setDate(date);
+        record.setDateCreated(date);
         record = repo.save(record);
         if ( record  == null)
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"unable to save record in database");
@@ -45,7 +45,7 @@ public class PatientCarbResource extends AuthResource {
         LocalDate date = frm.getLocalDate();
         if (date == null )
             throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY,"invalid date format in body");
-        record.setDate(date);
+        record.setDateCreated(date);
         record = repo.update(record);
         if ( record == null )
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"unable to update record in database");

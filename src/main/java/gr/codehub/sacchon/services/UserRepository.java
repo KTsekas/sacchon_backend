@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.repository;
+package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.User;
 

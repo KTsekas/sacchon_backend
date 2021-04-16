@@ -16,5 +16,5 @@ public class CarbRecord {
     private Patient patient;
     private double carbIntake;
 
-    private LocalDate date;
+    private LocalDate dateCreated;
 }

@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.jpautil;
+package gr.codehub.sacchon.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -20,5 +20,5 @@ public class GlucoseRecord {
     private double glucoseLevel;
 
     @Column(nullable=false)
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
 }

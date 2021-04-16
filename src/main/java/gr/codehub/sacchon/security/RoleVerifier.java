@@ -1,15 +1,14 @@
 package gr.codehub.sacchon.security;
 
-import gr.codehub.sacchon.jpautil.JpaUtil;
+import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.User;
-import gr.codehub.sacchon.repository.UserRepository;
+import gr.codehub.sacchon.services.UserRepository;
 import org.restlet.Application;
+import org.restlet.Request;
 import org.restlet.security.SecretVerifier;
 import org.restlet.security.Verifier;
 
 public class RoleVerifier extends SecretVerifier {
-    public static final String USER_ATTRIBUTE = "sacchon-user";
-
     private String role;
     private Application application;
 
@@ -30,8 +29,11 @@ public class RoleVerifier extends SecretVerifier {
             return Verifier.RESULT_INVALID;
         if (!compare(chars,usr.getPassword().toCharArray()))
             return Verifier.RESULT_INVALID;
-        // save user object in global context so we can access it in resources
-        this.application.getContext().getAttributes().put(USER_ATTRIBUTE,usr);
+
+        Request.getCurrent().getClientInfo().setUser( new org.restlet.security.User(s));
+        // save user object in global context so we can access it in resourcesg
+
+        this.application.getContext().getAttributes().put(s,usr);
         return Verifier.RESULT_VALID;
     }
 }

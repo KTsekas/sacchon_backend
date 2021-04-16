@@ -1,5 +1,6 @@
 package gr.codehub.sacchon.representations.forms;
 
+import gr.codehub.sacchon.model.GlucoseRecord;
 import lombok.Data;
 
 import java.time.Instant;
@@ -15,6 +16,12 @@ public class GlucoseForm {
 
 
     public LocalDateTime getLocalDateTime(){
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(this.dateTime), ZoneId.systemDefault());
+    }
+
+    public GlucoseRecord update(GlucoseRecord rec){
+        if( id != MISSING_ID_VALUE)
+            rec.id = this.id;
+        rec.setGlucoseLevel(glucoseLevel);
+        rec.setDateTime(getLocalDateTime());
     }
 }

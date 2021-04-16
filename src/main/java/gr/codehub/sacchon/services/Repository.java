@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.repository;
+package gr.codehub.sacchon.services;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -35,9 +35,16 @@ public abstract class Repository<T,K> {
         return entityManager.find(getEntityClass(), id);
     }
 
-    public List<T> findAll(){
-        return entityManager.createQuery("from "+getClassName()).getResultList();
+    public List<T> findAll(){ return findAll(0,Integer.MAX_VALUE);}
+
+    @SuppressWarnings("all")
+    public List<T> findAll(int offset,int limit){
+        return entityManager.createQuery("from "+getClassName())
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
     }
+
 
 
     // Update

@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.resources;
+package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
@@ -9,7 +9,7 @@ import org.restlet.resource.ResourceException;
 
 import java.util.List;
 
-public class PatientCarbListResource extends AuthResource {
+public class CarbListResource extends AuthResource {
 
     private int offset;
     private int limit;
@@ -23,9 +23,8 @@ public class PatientCarbListResource extends AuthResource {
             this.offset = Integer.parseInt(offset);
             this.limit = Integer.parseInt(limit);
         } catch (NumberFormatException ex) {
-            throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY, "invalid offset/limit");
+            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "invalid offset/limit");
         }
-
     }
 
     @Get("json")
