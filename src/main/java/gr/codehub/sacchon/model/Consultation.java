@@ -3,6 +3,7 @@ package gr.codehub.sacchon.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,5 +22,7 @@ public class Consultation {
 
     @Column(nullable = false)
     private String consultationText;
-    private Date date;
+
+    @Column(name="dateAdded")
+    private LocalDate date;
 }

@@ -21,7 +21,6 @@ public class MainApp extends Application {
         c.getServers().add(Protocol.HTTP,"localhost", 9000);
         c.getDefaultHost().attach("/api", new MainApp());
         c.start();
-
         LOGGER.info("Sample Web API started");
         LOGGER.info(String.format("URL: http://%s:%d",
                 c.getServers().get(0).getAddress(),

@@ -5,7 +5,7 @@ import gr.codehub.sacchon.representations.SingleValueRepresentation;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.CarbService;
 import gr.codehub.sacchon.services.GlucoseService;
-import gr.codehub.sacchon.util.DateHelper;
+import net.bytebuddy.asm.Advice;
 import org.restlet.data.Status;
 import org.restlet.resource.Get;
 
@@ -34,8 +34,10 @@ public class AvgResource extends AuthResource {
         }
         String start = this.getQueryValue("start");
         String end = this.getQueryValue("end");
-        LocalDate start_date = DateHelper.getIfDateOrDefault(start, DateHelper.MIN);
-        LocalDate end_date = DateHelper.getIfDateOrDefault(end, DateHelper.MAX);
+//        LocalDate start_date = DateHelper.getIfDateOrDefault(start, DateHelper.MIN);
+//        LocalDate end_date = DateHelper.getIfDateOrDefault(end, DateHelper.MAX);
+        LocalDate start_date=null;
+        LocalDate end_date=null;
         if (start_date == null) {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "invalid start date");
             return null;

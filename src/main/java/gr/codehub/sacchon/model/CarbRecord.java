@@ -16,5 +16,6 @@ public class CarbRecord  {
     private Patient patient;
     private double carbIntake;
 
-    private LocalDate dateCreated;
+    @Column(name="dateCreated")
+    private LocalDate date;
 }

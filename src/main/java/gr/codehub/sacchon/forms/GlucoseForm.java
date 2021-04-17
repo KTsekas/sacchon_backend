@@ -1,35 +1,51 @@
 package gr.codehub.sacchon.forms;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import gr.codehub.sacchon.model.GlucoseRecord;
-import gr.codehub.sacchon.util.DateHelper;
+import gr.codehub.sacchon.util.LocalDateDeserializer;
+import gr.codehub.sacchon.util.LocalDateSerializer;
+import gr.codehub.sacchon.util.LocalTimeDeserializer;
+import gr.codehub.sacchon.util.LocalTimeSerializer;
 import lombok.Data;
+import net.bytebuddy.asm.Advice;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.LocalDate;
 
 @Data
 public class GlucoseForm implements FieldForm<GlucoseRecord> {
-    public static final int MISSING_ID_VALUE=-1;
-    private int id=MISSING_ID_VALUE;
+    public static final int MISSING_ID_VALUE = -1;
+    private int id = MISSING_ID_VALUE;
     private double glucoseLevel;
-    private long dateTime;
-    private LocalDateTime dateTimeObject;
 
-    public void process(){
-        this.dateTimeObject = DateHelper.getLocalDateTimeFromUTC(dateTime);
-    }
+    @JsonSerialize( using = LocalDateSerializer.class)
+    @JsonDeserialize( using = LocalDateDeserializer.class)
+    private LocalDate date;
 
-    public GlucoseRecord create(){
+    @JsonSerialize( using = LocalTimeSerializer.class)
+    @JsonDeserialize( using = LocalTimeDeserializer.class)
+    private LocalTime time;
+
+
+    public GlucoseRecord create() {
         return update(new GlucoseRecord());
     }
-    public GlucoseRecord update(GlucoseRecord rec){
+
+    public GlucoseRecord update(GlucoseRecord rec) {
         rec.setGlucoseLevel(glucoseLevel);
-        rec.setDateTime(dateTimeObject);
+        rec.setDate(LocalDate.now());
+        rec.setTime(null);
         return rec;
     }
+
     public boolean isPutValid() {
         return this.id != MISSING_ID_VALUE && isPostValid();
     }
-    public boolean isPostValid(){
-        return this.dateTimeObject != null;
+    public boolean isPostValid() {
+        return true;
     }
 }

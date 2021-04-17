@@ -35,20 +35,20 @@ public class DoctorService{
             em.close();
         }
     }
-    public List<CarbRecord> getCarbs(int offset, int limit){
-        if ( doctor.getPatient() == null )
-            return new ArrayList<>();
-        CarbService carb = new CarbService(doctor.getPatient());
-        List<CarbRecord> items = carb.getList(offset,limit);
-        carb.close();
-        return items;
-    }
-    public List<GlucoseRecord> getGlucoseLevels(int offset, int limit){
-        if ( doctor.getPatient() == null )
-            return new ArrayList<>();
-        GlucoseService carb = new GlucoseService(doctor.getPatient());
-        List<GlucoseRecord> items = carb.getList(offset,limit);
-        carb.close();
-        return items;
-    }
+//    public List<CarbRecord> getCarbs(int offset, int limit){
+//        if ( doctor.getPatient() == null )
+//            return new ArrayList<>();
+//        CarbService carb = new CarbService(doctor.getPatient());
+//        List<CarbRecord> items = carb.getList(offset,limit);
+//        carb.close();
+//        return items;
+//    }
+//    public List<GlucoseRecord> getGlucoseLevels(int offset, int limit){
+//        if ( doctor.getPatient() == null )
+//            return new ArrayList<>();
+//        GlucoseService carb = new GlucoseService(doctor.getPatient());
+//        List<GlucoseRecord> items = carb.getList(offset,limit);
+//        carb.close();
+//        return items;
+//    }
 }

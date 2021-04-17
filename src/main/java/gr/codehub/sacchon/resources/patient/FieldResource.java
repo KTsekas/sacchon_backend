@@ -34,13 +34,13 @@ public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthRes
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
             return;
         }
-        frm.process();
         if( !frm.isPostValid()){
-            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "Invalid format in body");
             return;
         }
+        System.out.println(frm);
         if (getService().post(frm.create()).isEmpty())
-            setStatus(Status.SERVER_ERROR_INTERNAL, "unable to save record in database");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save record in database");
     }
 
     @Put("json")
@@ -49,9 +49,8 @@ public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthRes
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
             return;
         }
-        frm.process();
         if (!frm.isPutValid()){
-            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "Invalid format in body");
             return;
         }
         FieldService<T> srv = getService();
