@@ -22,7 +22,6 @@ public class RoleVerifier extends SecretVerifier {
         // get user from database if exists
         UserRepository repo = new UserRepository(JpaUtil.getEntityManager());
         User usr = repo.getUser(s);
-        repo.getEntityManager().close();
         // first check if user with username s exists, in  correct role, then password
         if (usr == null)
             return Verifier.RESULT_INVALID;
@@ -35,6 +34,7 @@ public class RoleVerifier extends SecretVerifier {
         // save user object in global context so we can access it in resourcesg
 
         ctx.getAttributes().put(s,usr);
+        ctx.getAttributes().put(String.valueOf(usr.hashCode()),repo.getEntityManager());
         return Verifier.RESULT_VALID;
     }
 }

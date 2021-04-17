@@ -7,21 +7,26 @@ import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import javax.persistence.EntityManager;
+
 public class AuthResource extends ServerResource {
     private User authenticatedUser;
+    private EntityManager userEntityManager;
     private BaseService service;
 
     @Override
     protected void doInit() throws ResourceException {
         super.doInit();
-        // get user object from global context
+        // get user object.entity manager from global context
         Context ctx  = getApplication().getContext();
         String id = getRequest().getClientInfo().getUser().getIdentifier();
         this.authenticatedUser = (User) ctx.getAttributes().get(id);
-        ctx.getAttributes().remove(id);
-        if( this.authenticatedUser == null ){
+        if( this.authenticatedUser == null )
             throw new ResourceException(Status.CLIENT_ERROR_UNAUTHORIZED);
-        }
+        String emId =String.valueOf(this.authenticatedUser.hashCode());
+        this.userEntityManager = (EntityManager) ctx.getAttributes().get(emId);
+        ctx.getAttributes().remove(id);
+        ctx.getAttributes().remove(emId);
     }
     @Override
     protected void doRelease() throws ResourceException {
@@ -29,6 +34,8 @@ public class AuthResource extends ServerResource {
         // close entity managers
         if ( service != null )
             service.close();
+        if( userEntityManager != null)
+            userEntityManager.close();
     }
 
     public User getUser() { return this.authenticatedUser; }
