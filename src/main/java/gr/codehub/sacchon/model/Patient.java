@@ -14,7 +14,7 @@ import java.util.List;
 @DiscriminatorValue(UserRole.PATIENT)
 public class Patient extends User{
 
-    @OneToOne(cascade = CascadeType.ALL,fetch =FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
     private Doctor doctor;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

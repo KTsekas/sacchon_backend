@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class GlucoseService extends BaseService implements FieldService<GlucoseRecord>{
 
-    private Patient patient;
+    private final Patient patient;
 
     public GlucoseService(Patient patient) {
         this.patient = patient;

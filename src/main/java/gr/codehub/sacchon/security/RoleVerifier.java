@@ -9,8 +9,8 @@ import org.restlet.security.SecretVerifier;
 import org.restlet.security.Verifier;
 
 public class RoleVerifier extends SecretVerifier {
-    private String role;
-    private Context ctx;
+    private final String role;
+    private final Context ctx;
 
     public RoleVerifier(Context ctx, String role) {
         this.role = role;

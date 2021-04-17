@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class CarbService extends BaseService implements FieldService<CarbRecord> {
 
-    private Patient patient;
+    private final Patient patient;
 
     public CarbService(Patient patient) {
         this.patient = patient;

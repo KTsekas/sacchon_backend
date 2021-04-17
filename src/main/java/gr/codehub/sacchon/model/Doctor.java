@@ -15,7 +15,7 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
     List<Consultation> consultations;
 
-    @OneToOne(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
+    @OneToOne(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.EAGER)
     Patient patient;
 
     @Override
