@@ -1,22 +1,97 @@
 package gr.codehub.sacchon.services;
 
+import gr.codehub.sacchon.model.PatientField;
+import gr.codehub.sacchon.model.Patient;
+
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface FieldService<R> {
-    Optional<R> get(int id);
+public abstract class FieldService<R extends PatientField> extends BaseService {
 
-    boolean del(int id);
+    private final Patient patient;
+    abstract String getName();
+    abstract Class<R> getRClass();
+    abstract String getAverageAggregator();
 
-    Optional<R> post(R rec);
+    public FieldService(Patient patient) {
+        this.patient = patient;
+    }
 
-    Optional<R> put(R rec);
+    public Optional<R> get(int id) {
+        return Optional.of(em.find(getRClass(), id));
+    }
 
+    public boolean del(int id) {
+        Optional<R> rec = get(id);
+        if( rec.isEmpty() )
+            return false;
+        try {
+            em.getTransaction().begin();
+            em.createQuery("delete from " + getName() + " where patient=?1 and id=?2")
+                    .setParameter(1,patient)
+                    .setParameter(2,id)
+                    .executeUpdate();
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public Optional<R> post(R rec) {
+        rec.setPatient(patient);
+        try {
+            em.getTransaction().begin();
+            em.persist(rec);
+            em.getTransaction().commit();
+            return Optional.of(rec);
+        } catch (Exception ex) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<R> put(R rec) {
+        try {
+            em.getTransaction().begin();
+            em.createQuery("from " + getName() +" where patient=?1").setParameter(1, patient);
+            em.getTransaction().commit();
+            return Optional.of(rec);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
     @SuppressWarnings("all")
-    List<R> getList(int offset, int limit);
+    public List<R> getList(int offset, int limit) {
+        return em.createQuery("from " +getName() +" where patient=?1")
+                .setParameter(1,patient)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 
-    double getAverage(LocalDate start, LocalDate end);
 
-    long getMaxItems();
+    public double getAverage(LocalDate start, LocalDate end) {
+        try {
+            return (Double) em.createQuery("select avg(g." + getAverageAggregator() + ") from " + getName() + " g where g.patient is ?3 and g.date between ?1 and ?2")
+                    .setParameter(1, start)
+                    .setParameter(2, end)
+                    .setParameter(3, patient).getSingleResult();
+        } catch (NullPointerException ex) {
+            return 0;
+        }
+    }
+
+
+    public long getMaxItems() {
+        try{
+            return (Long) em.createQuery("select count(*) from " + getName()+ " g where g.patient is ?1")
+                    .setParameter(1,patient)
+                    .getSingleResult();
+        }catch(NoResultException ex){
+
+            return 0;
+        }
+    }
 }

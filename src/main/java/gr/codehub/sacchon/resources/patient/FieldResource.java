@@ -1,5 +1,6 @@
 package gr.codehub.sacchon.resources.patient;
 
+import gr.codehub.sacchon.model.PatientField;
 import gr.codehub.sacchon.representations.PaginationListRepresentation;
 import gr.codehub.sacchon.forms.FieldForm;
 import gr.codehub.sacchon.resources.AuthResource;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthResource {
+public abstract class FieldResource<T extends PatientField,F extends FieldForm<T>, R> extends AuthResource {
 
     abstract FieldService<T> getService();
 

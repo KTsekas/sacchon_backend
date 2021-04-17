@@ -8,86 +8,26 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class GlucoseService extends BaseService implements FieldService<GlucoseRecord>{
-
-    private final Patient patient;
+public class GlucoseService extends FieldService<GlucoseRecord>{
 
     public GlucoseService(Patient patient) {
-        this.patient = patient;
+        super(patient);
     }
 
-    public Optional<GlucoseRecord> get(int id) {
-        return Optional.of(em.find(GlucoseRecord.class, id));
-    }
-
-    public boolean del(int id) {
-        Optional<GlucoseRecord> rec = get(id);
-        if( rec.isEmpty() )
-            return false;
-        try {
-            em.getTransaction().begin();
-            em.createQuery("delete from GlucoseRecord where patient=?1 and id=?2")
-                    .setParameter(1,patient)
-                    .setParameter(2,id)
-                    .executeUpdate();
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
-    public Optional<GlucoseRecord> post(GlucoseRecord rec) {
-        rec.setPatient(patient);
-        try {
-            em.getTransaction().begin();
-            em.persist(rec);
-            em.getTransaction().commit();
-            return Optional.of(rec);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
-    }
-
-    public Optional<GlucoseRecord> put(GlucoseRecord rec) {
-        try {
-            em.getTransaction().begin();
-            em.createQuery("from GlucoseRecord where patient=?1").setParameter(1, patient);
-            em.getTransaction().commit();
-            return Optional.of(rec);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-    @SuppressWarnings("all")
-    public List<GlucoseRecord> getList(int offset, int limit) {
-        return em.createQuery("from GlucoseRecord where patient=?1")
-                .setParameter(1,patient)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
-    }
-
-
-    public double getAverage(LocalDate start, LocalDate end) {
-        try {
-            return (Double) em.createQuery("select avg(g.glucoseLevel) from GlucoseRecord g where c.patient is ?3 and c.dateCreated between ?1 and ?2")
-                    .setParameter(1, start)
-                    .setParameter(2, end)
-                    .setParameter(3, patient).getSingleResult();
-        } catch (NullPointerException ex) {
-            return 0;
-        }
-    }
     @Override
-    public long getMaxItems() {
-        try{
-            return (Long) em.createQuery("select count(*) from GlucoseRecord g where g.patient is ?1")
-                    .setParameter(1,patient)
-                    .getSingleResult();
-        }catch(NoResultException ex){
-
-            return 0;
-        }
+    String getName() {
+        return GlucoseRecord.class.getName();
     }
+
+    @Override
+    Class<GlucoseRecord> getRClass() {
+        return GlucoseRecord.class;
+    }
+
+    @Override
+    String getAverageAggregator() {
+        return "glucoseLevel";
+    }
+
+
 }

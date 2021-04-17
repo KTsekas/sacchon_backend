@@ -4,14 +4,12 @@ package gr.codehub.sacchon.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
 @Entity
-public class GlucoseRecord {
+public class GlucoseRecord implements PatientField {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;

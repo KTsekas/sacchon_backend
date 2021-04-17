@@ -1,6 +1,6 @@
 package gr.codehub.sacchon.resources;
 
-import gr.codehub.sacchon.forms.SignUpForm;
+import gr.codehub.sacchon.model.SignUpForm;
 import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.model.UserRole;
 import gr.codehub.sacchon.representations.LoginRepresentation;

@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.forms;
+package gr.codehub.sacchon.model;
 
 import gr.codehub.sacchon.model.User;
 import lombok.Data;

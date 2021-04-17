@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-public class CarbRecord  {
+public class CarbRecord implements PatientField {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
