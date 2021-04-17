@@ -8,8 +8,8 @@ import gr.codehub.sacchon.services.GlucoseService;
 
 public class GlucoseResource extends FieldResource<GlucoseRecord,GlucoseForm,GlucoseRepresentation> {
 
-    protected GlucoseService getService(){
-        GlucoseService srv = new GlucoseService((Patient)getUser());
+    protected GlucoseService getService() {
+        GlucoseService srv = new GlucoseService((Patient) getUser());
         this.setService(srv);
         return srv;
     }
@@ -18,45 +18,4 @@ public class GlucoseResource extends FieldResource<GlucoseRecord,GlucoseForm,Glu
     GlucoseRepresentation getRepresentation(GlucoseRecord item) {
         return new GlucoseRepresentation(item);
     }
-//
-//    @Get("json")
-//    public PaginationListRepresentation<GlucoseRepresentation> getList() {
-//        int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
-//        int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
-//
-//        List<GlucoseRepresentation> items = getService().getList(offset, limit).stream().map(GlucoseRepresentation::new).collect(Collectors.toList());
-//        int maxItems = ((Patient) getUser()).getCarbs().size(); // its supposed to be a SELECT COUNT
-//        return new PaginationListRepresentation<>(offset, maxItems, items);
-//    }
-//
-//    @Post("json")
-//    public void insert(GlucoseForm frm) {
-//        if (frm == null)
-//            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
-//        if (getService().post(frm.create()).isEmpty())
-//            throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "unable to save record in database");
-//    }
-//
-//    @Put("json")
-//    public void update(GlucoseForm frm) {
-//        if (frm == null)
-//            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
-//        if (frm.getId() == GlucoseForm.MISSING_ID_VALUE)
-//            throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "Id field missing from form");
-//        GlucoseService srv = getService();
-//        Optional<GlucoseRecord> rec = srv.get(frm.getId());
-//        if ( rec.isEmpty() )
-//            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "no record found with this id");
-//        if (srv.put(frm.update(rec.get())).isEmpty())
-//            throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "unable to update record in database");
-//    }
-//
-//    @Delete("json")
-//    public void deleteRecord() {
-//        int id = ResourceHelper.parseIntOrDef("id",-1,this);
-//        if( id == -1)
-//            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"invalid id attribute");
-//        if (!getService().del(id))
-//            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "unable to delete record");
-//    }
 }
