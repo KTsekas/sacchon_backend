@@ -3,11 +3,12 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class CarbService extends BaseService {
+public class CarbService extends BaseService implements FieldService<CarbRecord> {
 
     private Patient patient;
 
@@ -15,10 +16,12 @@ public class CarbService extends BaseService {
         this.patient = patient;
     }
 
+    @Override
     public Optional<CarbRecord> get(int id) {
         return Optional.of(em.find(CarbRecord.class, id));
     }
 
+    @Override
     public boolean del(int id) {
         Optional<CarbRecord> rec = get(id);
         if (rec.isEmpty())
@@ -37,6 +40,7 @@ public class CarbService extends BaseService {
         }
     }
 
+    @Override
     public Optional<CarbRecord> post(CarbRecord rec) {
         rec.setPatient(patient);
         try {
@@ -49,6 +53,7 @@ public class CarbService extends BaseService {
         }
     }
 
+    @Override
     public Optional<CarbRecord> put(CarbRecord rec) {
         try {
             em.getTransaction().begin();
@@ -60,6 +65,7 @@ public class CarbService extends BaseService {
         }
     }
 
+    @Override
     @SuppressWarnings("all")
     public List<CarbRecord> getList(int offset, int limit) {
         return em.createQuery("from CarbRecord where patient=?1")
@@ -69,6 +75,7 @@ public class CarbService extends BaseService {
                 .getResultList();
     }
 
+    @Override
     public double getAverage(LocalDate start, LocalDate end) {
         try {
             return (Double) em.createQuery("select avg(c.carbIntake) from CarbRecord g where c.patient is ?3 and c.dateCreated between ?1 and ?2")
@@ -76,6 +83,18 @@ public class CarbService extends BaseService {
                     .setParameter(2, end)
                     .setParameter(3, patient).getSingleResult();
         } catch (NullPointerException ex) {
+            return 0;
+        }
+    }
+
+    @Override
+    public long getMaxItems() {
+        try{
+            return (Long) em.createQuery("select count(*) from CarbRecord g where g.patient is ?1")
+                    .setParameter(1,patient)
+                    .getSingleResult();
+        }catch(NoResultException ex){
+
             return 0;
         }
     }

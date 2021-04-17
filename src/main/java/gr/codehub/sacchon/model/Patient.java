@@ -2,6 +2,8 @@ package gr.codehub.sacchon.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +24,7 @@ public class Patient extends User{
     private List<CarbRecord> carbs;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.EXTRA)
     private List<GlucoseRecord> glucoseLevels;
 
     @Override

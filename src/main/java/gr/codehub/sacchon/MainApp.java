@@ -1,11 +1,12 @@
 package gr.codehub.sacchon;
 
-import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.UserRole;
 import gr.codehub.sacchon.routers.AuthRouter;
 import gr.codehub.sacchon.routers.DoctorRouter;
 import gr.codehub.sacchon.routers.PatientRouter;
+import gr.codehub.sacchon.security.CorsFilter;
 import gr.codehub.sacchon.security.RoleVerifier;
+import gr.codehub.sacchon.util.JpaUtil;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Restlet;
@@ -15,6 +16,7 @@ import org.restlet.engine.Engine;
 import org.restlet.routing.Router;
 import org.restlet.routing.Template;
 import org.restlet.security.ChallengeAuthenticator;
+import org.restlet.service.StatusService;
 
 import javax.persistence.EntityManager;
 import java.util.logging.Logger;
@@ -50,6 +52,7 @@ public class MainApp extends Application {
         DoctorRouter doctor = new DoctorRouter();
         Router router = new Router();
         router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
+        StatusService src = new StatusService();
 
         auth.setupEndPoints();
         patient.setupEndPoints();
@@ -58,10 +61,8 @@ public class MainApp extends Application {
         router.attach("/auth",auth);
         router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));
         router.attach("/doctor",getRoleGuard(doctor,UserRole.DOCTOR));
-//        CorsFilter corsFilter = new CorsFilter(this);
-//        return corsFilter.createCorsFilter(publicRouter);
-        patient.getRoutes().forEach(System.out::println);
-        return router;
+
+        return new CorsFilter(this).createCorsFilter(router);
     }
 
 }

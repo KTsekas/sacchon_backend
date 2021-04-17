@@ -3,11 +3,12 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.model.Patient;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class GlucoseService extends BaseService{
+public class GlucoseService extends BaseService implements FieldService<GlucoseRecord>{
 
     private Patient patient;
 
@@ -75,6 +76,17 @@ public class GlucoseService extends BaseService{
                     .setParameter(2, end)
                     .setParameter(3, patient).getSingleResult();
         } catch (NullPointerException ex) {
+            return 0;
+        }
+    }
+    @Override
+    public long getMaxItems() {
+        try{
+            return (Long) em.createQuery("select count(*) from CarbRecord g where g.patient is ?1")
+                    .setParameter(1,patient)
+                    .getSingleResult();
+        }catch(NoResultException ex){
+
             return 0;
         }
     }

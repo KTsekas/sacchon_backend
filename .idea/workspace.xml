@@ -4,32 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="Refactoring still in progress">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/SingleValueRepresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CountResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/BaseService.java" afterDir="false" />
+    <list default="true" id="b4f48c44-1216-4706-920c-82fc9a68e145" name="Default Changelist" comment="Refactored CarbResource,GlucoseResource using a base class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/PaginationListRepresentation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/FieldForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/FieldResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/CorsFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/FieldService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/AvgForm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientCarbListRepresentation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientGlucoseListRepresentation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientGlucoseRepresentation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/GlucoseRepresentation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/PatientInfoRepresentation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/patient/InfoRepresentation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/AuthResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/AuthResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/AvgCarbResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/AvgResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbListResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/CarbRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/model/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/CarbForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/GlucoseForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/GlucoseResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/GlucoseResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/InfoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/InfoResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/routers/PatientRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/security/RoleVerifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/CarbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/CarbService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/GlucoseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/GlucoseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/PatientService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/util/DateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/util/DateHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/jpautil/JpaUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gr/codehub/sacchon/repository/Repository.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -83,6 +75,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IDEA_Projects\SacchonBackend" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="gr.codehub.sacchon.services" />
+      <recent name="gr.codehub.sacchon.representations.forms" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="gr.codehub.sacchon.services" />
@@ -195,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618611170690</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Refactoring complete">
+      <created>1618616278407</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1618616278407</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,30 +252,17 @@
     <MESSAGE value="naming conventions cleanup" />
     <MESSAGE value="the great service refactoring" />
     <MESSAGE value="Refactoring still in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring still in progress" />
+    <MESSAGE value="Refactoring complete" />
+    <MESSAGE value="Refactored CarbResource,GlucoseResource using a base class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored CarbResource,GlucoseResource using a base class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/SignUpForm.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/representations/forms/SignUpForm.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/CarbResource.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/services/CarbService.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/src/main/java/gr/codehub/sacchon/resources/patient/FieldResource.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
