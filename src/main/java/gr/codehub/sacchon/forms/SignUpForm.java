@@ -1,5 +1,7 @@
-package gr.codehub.sacchon.model;
+package gr.codehub.sacchon.forms;
 
+import gr.codehub.sacchon.model.Doctor;
+import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.model.User;
 import lombok.Data;
 
@@ -12,13 +14,18 @@ public class SignUpForm {
     private String role;
 
 
-    public User createUser(){
-        User usr = new User();
+    public <T extends User> T createUser(T usr){
         usr.setFirstName(firstName);
         usr.setLastName(lastName);
         usr.setEmail(email);
         usr.setPassword(password);
         usr.setRole(role);
         return usr;
+    }
+    public Doctor createDoctor(){
+        return createUser(new Doctor());
+    }
+    public Patient createPatient(){
+       return createUser(new Patient());
     }
 }

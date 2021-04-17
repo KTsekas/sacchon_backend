@@ -1,6 +1,6 @@
 package gr.codehub.sacchon.resources;
 
-import gr.codehub.sacchon.model.SignUpForm;
+import gr.codehub.sacchon.forms.SignUpForm;
 import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.model.UserRole;
 import gr.codehub.sacchon.representations.LoginRepresentation;
@@ -44,7 +44,11 @@ public class SignUpResource extends ServerResource {
             return null;
         }
         // finally we can make user
-        User usr = frm.createUser();
+        User usr=null;
+        if (frm.getRole().equals(UserRole.DOCTOR))
+            usr = frm.createDoctor();
+        else if ( frm.getRole().equals(UserRole.PATIENT))
+            usr = frm.createDoctor();
         usr = repo.save(usr);
         if (usr == null) {
             setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to create account");

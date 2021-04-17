@@ -1,5 +1,6 @@
 package gr.codehub.sacchon.services;
 
+import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.model.User;
 
 import javax.persistence.EntityManager;
@@ -29,4 +30,5 @@ public class UserRepository extends Repository<User,Integer> {
             return null;
         }
     }
+
 }
