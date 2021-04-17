@@ -56,22 +56,22 @@ public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthRes
         FieldService<T> srv = getService();
         Optional<T> rec = srv.get(frm.getId());
         if (rec.isEmpty()){
-            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "no record found with this id");
+            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "No record found with this id");
             return;
         }
         frm.update(rec.get());
         if (srv.put(rec.get()).isEmpty())
-            setStatus(Status.SERVER_ERROR_INTERNAL, "unable to update record in database");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to update record in database");
     }
 
     @Delete("json")
     public void deleteRecord() {
         int id = ResourceHelper.parseIntOrDef("id", -1, this);
         if (id == -1) {
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "invalid id attribute");
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid id attribute");
             return;
         }
         if (!getService().del(id))
-            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "unable to delete record");
+            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "Unable to delete record");
     }
 }

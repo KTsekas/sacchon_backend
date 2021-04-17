@@ -36,18 +36,18 @@ public class SignUpResource extends ServerResource {
             return null;
         }
         if (!isValidPassword(frm.getPassword())) {
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "password not in correct format");
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Password not in correct format");
         }
         repo = new UserRepository(JpaUtil.getEntityManager());
         if (!canUseUsername(frm.getEmail())) {
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "account already exists or invalid username");
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Account already exists or invalid username");
             return null;
         }
         // finally we can make user
         User usr = frm.createUser();
         usr = repo.save(usr);
         if (usr == null) {
-            setStatus(Status.SERVER_ERROR_INTERNAL, "unable to create account");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to create account");
             return null;
         }
         else

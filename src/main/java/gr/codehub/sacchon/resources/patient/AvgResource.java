@@ -39,11 +39,11 @@ public class AvgResource extends AuthResource {
         LocalDate start_date=null;
         LocalDate end_date=null;
         if (start_date == null) {
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "invalid start date");
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid start date");
             return null;
         }
         if (end_date == null){
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "invalid end date");
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid end date");
             return null;
         }
         if (type.equals("carb"))
