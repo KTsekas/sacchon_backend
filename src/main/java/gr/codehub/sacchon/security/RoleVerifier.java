@@ -1,20 +1,20 @@
 package gr.codehub.sacchon.security;
 
-import gr.codehub.sacchon.util.JpaUtil;
 import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.services.UserRepository;
-import org.restlet.Application;
+import gr.codehub.sacchon.util.JpaUtil;
+import org.restlet.Context;
 import org.restlet.Request;
 import org.restlet.security.SecretVerifier;
 import org.restlet.security.Verifier;
 
 public class RoleVerifier extends SecretVerifier {
     private String role;
-    private Application application;
+    private Context ctx;
 
-    public RoleVerifier(Application app, String role) {
+    public RoleVerifier(Context ctx, String role) {
         this.role = role;
-        this.application = app;
+        this.ctx = ctx;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RoleVerifier extends SecretVerifier {
         Request.getCurrent().getClientInfo().setUser( new org.restlet.security.User(s));
         // save user object in global context so we can access it in resourcesg
 
-        this.application.getContext().getAttributes().put(s,usr);
+        ctx.getAttributes().put(s,usr);
         return Verifier.RESULT_VALID;
     }
 }

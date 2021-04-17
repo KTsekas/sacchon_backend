@@ -1,22 +1,12 @@
 package gr.codehub.sacchon;
 
-import gr.codehub.sacchon.model.UserRole;
-import gr.codehub.sacchon.routers.AuthRouter;
-import gr.codehub.sacchon.routers.DoctorRouter;
-import gr.codehub.sacchon.routers.PatientRouter;
-import gr.codehub.sacchon.security.CorsFilter;
-import gr.codehub.sacchon.security.RoleVerifier;
+import gr.codehub.sacchon.routers.AppRouter;
 import gr.codehub.sacchon.util.JpaUtil;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Restlet;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
-import org.restlet.routing.Router;
-import org.restlet.routing.Template;
-import org.restlet.security.ChallengeAuthenticator;
-import org.restlet.service.StatusService;
 
 import javax.persistence.EntityManager;
 import java.util.logging.Logger;
@@ -38,31 +28,9 @@ public class MainApp extends Application {
                 c.getServers().get(0).getPort()));
     }
 
-    private ChallengeAuthenticator getRoleGuard(Router router,String role){
-        ChallengeAuthenticator guard = new ChallengeAuthenticator(this.getContext(), ChallengeScheme.HTTP_BASIC,"sacchon");
-        guard.setVerifier( new RoleVerifier(this,role));
-        guard.setNext(router);
-        return guard;
-    }
-
     @Override
     public Restlet createInboundRoot() {
-        AuthRouter auth = new AuthRouter();
-        PatientRouter patient = new PatientRouter();
-        DoctorRouter doctor = new DoctorRouter();
-        Router router = new Router();
-        router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
-        StatusService src = new StatusService();
-
-        auth.setupEndPoints();
-        patient.setupEndPoints();
-
-
-        router.attach("/auth",auth);
-        router.attach("/patient",getRoleGuard(patient,UserRole.PATIENT));
-        router.attach("/doctor",getRoleGuard(doctor,UserRole.DOCTOR));
-
-        return new CorsFilter(this).createCorsFilter(router);
+        return new AppRouter(this.getContext()).createRouter();
     }
 
 }

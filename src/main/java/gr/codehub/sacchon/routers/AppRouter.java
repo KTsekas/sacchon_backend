@@ -1,29 +1,35 @@
-package gr.codehub.sacchon.security;
+package gr.codehub.sacchon.routers;
 
-import org.restlet.Application;
+import gr.codehub.sacchon.model.UserRole;
+import gr.codehub.sacchon.security.RoleVerifier;
+import org.restlet.Context;
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.Restlet;
+import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Header;
 import org.restlet.data.Method;
 import org.restlet.engine.header.HeaderConstants;
 import org.restlet.routing.Filter;
+import org.restlet.routing.Router;
+import org.restlet.routing.Template;
+import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.util.Series;
 
 import java.util.Collections;
 import java.util.HashSet;
 
-public class CorsFilter {
-    private Application application;
+public class AppRouter {
 
-    public CorsFilter(Application application){
-        this.application = application;
+    private Context ctx;
+
+    public AppRouter(Context ctx) {
+        this.ctx = ctx;
     }
 
-
     @SuppressWarnings("all")
-    public Filter createCorsFilter(Restlet next) {
-        return new Filter(application.getContext(), next) {
+    private Filter createCorsFilter(Restlet next) {
+        return new Filter(this.ctx, next) {
 
             @Override
             protected int beforeHandle(Request request, Response response) {
@@ -39,7 +45,7 @@ public class CorsFilter {
 
                 Series<Header> requestHeaders = (Series<Header>) request.getAttributes().get(HeaderConstants.ATTRIBUTE_HEADERS);
                 String requestOrigin = requestHeaders.getFirstValue("Origin", false, "*");
-                String rh = requestHeaders.getFirstValue( "Access-Control-Request-Headers", false, "*");
+                String rh = requestHeaders.getFirstValue("Access-Control-Request-Headers", false, "*");
 
                 response.setAccessControlAllowCredentials(true);
                 response.setAccessControlAllowOrigin(requestOrigin);
@@ -55,7 +61,7 @@ public class CorsFilter {
 
                 // Set response headers
 
-                response.getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS,  responseHeaders);
+                response.getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, responseHeaders);
 
                 // Handle HTTP methods
 
@@ -67,4 +73,29 @@ public class CorsFilter {
         };
     }
 
+    private ChallengeAuthenticator getRoleGuard(Router router, String role) {
+        ChallengeAuthenticator guard = new ChallengeAuthenticator(this.ctx, ChallengeScheme.HTTP_BASIC, "sacchon");
+        guard.setVerifier(new RoleVerifier(this.ctx, role));
+        guard.setNext(router);
+        return guard;
+    }
+
+    public Restlet createRouter() {
+
+        AuthRouter auth = new AuthRouter();
+        PatientRouter patient = new PatientRouter();
+        DoctorRouter doctor = new DoctorRouter();
+
+        Router router = new Router();
+        router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
+
+        auth.setupEndPoints();
+        patient.setupEndPoints();
+
+        router.attach("/auth", auth);
+        router.attach("/patient", getRoleGuard(patient, UserRole.PATIENT));
+        router.attach("/doctor", getRoleGuard(doctor, UserRole.DOCTOR));
+
+        return createCorsFilter(router);
+    }
 }
