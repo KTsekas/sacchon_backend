@@ -2,7 +2,7 @@ package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.CarbRecord;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.representations.forms.CarbForm;
+import gr.codehub.sacchon.forms.CarbForm;
 import gr.codehub.sacchon.representations.patient.CarbRepresentation;
 import gr.codehub.sacchon.services.CarbService;
 

@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.representations.forms;
+package gr.codehub.sacchon.forms;
 
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.util.DateHelper;

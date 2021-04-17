@@ -5,7 +5,7 @@ import gr.codehub.sacchon.model.User;
 import gr.codehub.sacchon.model.UserRole;
 import gr.codehub.sacchon.services.UserRepository;
 import gr.codehub.sacchon.representations.LoginRepresentation;
-import gr.codehub.sacchon.representations.forms.SignUpForm;
+import gr.codehub.sacchon.forms.SignUpForm;
 import org.restlet.data.Status;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;

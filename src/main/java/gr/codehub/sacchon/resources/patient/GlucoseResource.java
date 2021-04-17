@@ -2,7 +2,7 @@ package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.representations.forms.GlucoseForm;
+import gr.codehub.sacchon.forms.GlucoseForm;
 import gr.codehub.sacchon.representations.patient.GlucoseRepresentation;
 import gr.codehub.sacchon.services.GlucoseService;
 

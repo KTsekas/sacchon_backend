@@ -1,7 +1,7 @@
 package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.representations.PaginationListRepresentation;
-import gr.codehub.sacchon.representations.forms.FieldForm;
+import gr.codehub.sacchon.forms.FieldForm;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.FieldService;
 import gr.codehub.sacchon.util.ResourceHelper;
