@@ -31,37 +31,49 @@ public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthRes
 
     @Post("json")
     public void insert(F frm) {
-        if (frm == null)
-            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
+        if (frm == null){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
+            return;
+        }
         frm.process();
-        if( !frm.isPostValid())
-            throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+        if( !frm.isPostValid()){
+            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+            return;
+        }
         if (getService().post(frm.create()).isEmpty())
-            throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "unable to save record in database");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "unable to save record in database");
     }
 
     @Put("json")
     public void update(F frm) {
-        if (frm == null)
-            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
+        if (frm == null) {
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
+            return;
+        }
         frm.process();
-        if (!frm.isPutValid())
-            throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+        if (!frm.isPutValid()){
+            setStatus(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "invalid format in body");
+            return;
+        }
         FieldService<T> srv = getService();
         Optional<T> rec = srv.get(frm.getId());
-        if (rec.isEmpty())
-            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "no record found with this id");
+        if (rec.isEmpty()){
+            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "no record found with this id");
+            return;
+        }
         frm.update(rec.get());
         if (srv.put(rec.get()).isEmpty())
-            throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "unable to update record in database");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "unable to update record in database");
     }
 
     @Delete("json")
     public void deleteRecord() {
         int id = ResourceHelper.parseIntOrDef("id", -1, this);
-        if (id == -1)
-            throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "invalid id attribute");
+        if (id == -1) {
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "invalid id attribute");
+            return;
+        }
         if (!getService().del(id))
-            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "unable to delete record");
+            setStatus(Status.CLIENT_ERROR_NOT_FOUND, "unable to delete record");
     }
 }
