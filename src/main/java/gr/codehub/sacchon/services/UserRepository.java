@@ -21,7 +21,6 @@ public class UserRepository extends Repository<User,Integer> {
         return User.class.getName();
     }
 
-
     // searches for a single user based on username(email), returns null if none exist
     public User getUser(String email){
         try {
@@ -29,6 +28,5 @@ public class UserRepository extends Repository<User,Integer> {
         }catch(NoResultException ex){
             return null;
         }
-
     }
 }

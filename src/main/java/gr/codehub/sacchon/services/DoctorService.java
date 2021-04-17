@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DoctorService{
-    private Doctor doctor;
+    private final Doctor doctor;
 
     public DoctorService(Doctor doctor){
         this.doctor=doctor;

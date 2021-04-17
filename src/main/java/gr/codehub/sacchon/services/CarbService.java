@@ -94,7 +94,6 @@ public class CarbService extends BaseService implements FieldService<CarbRecord>
                     .setParameter(1,patient)
                     .getSingleResult();
         }catch(NoResultException ex){
-
             return 0;
         }
     }

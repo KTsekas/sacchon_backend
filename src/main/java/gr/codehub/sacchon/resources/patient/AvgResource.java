@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 public class AvgResource extends AuthResource {
 
-
     private SingleValueRepresentation<Double> getCarbAverage(LocalDate start, LocalDate end) {
         CarbService srv = new CarbService((Patient) getUser());
         setService(srv);

@@ -82,7 +82,7 @@ public class GlucoseService extends BaseService implements FieldService<GlucoseR
     @Override
     public long getMaxItems() {
         try{
-            return (Long) em.createQuery("select count(*) from CarbRecord g where g.patient is ?1")
+            return (Long) em.createQuery("select count(*) from GlucoseRecord g where g.patient is ?1")
                     .setParameter(1,patient)
                     .getSingleResult();
         }catch(NoResultException ex){

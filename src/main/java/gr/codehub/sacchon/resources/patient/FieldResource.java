@@ -18,13 +18,12 @@ public abstract class FieldResource<T,F extends FieldForm<T>, R> extends AuthRes
 
     abstract R getRepresentation(T item);
 
-
     @Get("json")
     public PaginationListRepresentation<R> getList() {
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         FieldService<T> srv= getService();
-        List<R> items = getService().getList(offset,limit).stream().map(this::getRepresentation).collect(Collectors.toList());
+        List<R> items = srv.getList(offset,limit).stream().map(this::getRepresentation).collect(Collectors.toList());
         long maxItems = srv.getMaxItems(); // its supposed to be a SELECT COUNT
         return new PaginationListRepresentation<>(offset, maxItems, items);
     }

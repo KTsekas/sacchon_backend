@@ -6,6 +6,7 @@ import gr.codehub.sacchon.resources.AuthResource;
 import org.restlet.resource.Get;
 
 public class InfoResource extends AuthResource {
+
     @Get("json")
     public InfoRepresentation getSomething() {
         return new InfoRepresentation((Doctor) getUser());

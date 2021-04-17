@@ -91,6 +91,7 @@ public class AppRouter {
 
         auth.setupEndPoints();
         patient.setupEndPoints();
+        doctor.setupEndPoints();
 
         router.attach("/auth", auth);
         router.attach("/patient", getRoleGuard(patient, UserRole.PATIENT));
