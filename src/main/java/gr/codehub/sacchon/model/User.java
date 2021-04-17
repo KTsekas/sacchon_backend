@@ -29,5 +29,5 @@ public class User {
         return this.firstName + " " +this.lastName;
     }
 
-
+    public boolean disabled;
 }

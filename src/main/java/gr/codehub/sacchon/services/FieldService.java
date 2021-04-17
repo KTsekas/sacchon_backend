@@ -62,9 +62,8 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
             return Optional.empty();
         }
     }
-    @SuppressWarnings("all")
     public List<R> getList(int offset, int limit) {
-        return em.createQuery("from " +getName() +" where patient=?1")
+        return em.createQuery("from " +getName() +" where patient=?1",getRClass())
                 .setParameter(1,patient)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
@@ -74,7 +73,7 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
 
     public double getAverage(LocalDate start, LocalDate end) {
         try {
-            return (Double) em.createQuery("select avg(g." + getAverageAggregator() + ") from " + getName() + " g where g.patient is ?3 and g.date between ?1 and ?2")
+            return em.createQuery("select avg(g." + getAverageAggregator() + ") from " + getName() + " g where g.patient is ?3 and g.date between ?1 and ?2",Double.class)
                     .setParameter(1, start)
                     .setParameter(2, end)
                     .setParameter(3, patient).getSingleResult();
@@ -86,7 +85,7 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
 
     public long getMaxItems() {
         try{
-            return (Long) em.createQuery("select count(*) from " + getName()+ " g where g.patient is ?1")
+            return em.createQuery("select count(*) from " + getName()+ " g where g.patient is ?1",Long.class)
                     .setParameter(1,patient)
                     .getSingleResult();
         }catch(NoResultException ex){

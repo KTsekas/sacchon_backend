@@ -1,14 +1,13 @@
 package gr.codehub.sacchon.services;
 
-import gr.codehub.sacchon.model.CarbRecord;
-import gr.codehub.sacchon.model.Doctor;
-import gr.codehub.sacchon.model.GlucoseRecord;
-import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.util.JpaUtil;
+import gr.codehub.sacchon.model.*;
+import gr.codehub.sacchon.util.PaginationTuple;
 
-import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DoctorService extends BaseService{
     private final Doctor doctor;
@@ -35,22 +34,37 @@ public class DoctorService extends BaseService{
             return Optional.empty();
         }
     }
-    @SuppressWarnings("all")
-    public List<Patient> getConsultingPatientList(int offset, int limit) {
-        return em.createQuery("from Patient where doctor=?1")
-                .setParameter(1,doctor)
-                .setFirstResult(offset)
+
+    public PaginationTuple<Patient> getPatients(int offset, int limit) {
+        TypedQuery<Patient> q = em.createQuery("from Patient where doctor=?1",Patient.class)
+            .setParameter(1,doctor);
+        int maxItems = q.getMaxResults();
+        return new PaginationTuple<>(
+                q.setFirstResult(offset)
                 .setMaxResults(limit)
-                .getResultList();
+                .getResultList(),
+                offset,maxItems);
     }
     // hard query
-    public List<Patient> getPatientsForConsulting(int offset,int limit){
-        return null;
+    public PaginationTuple<Patient> getFreePatients(int offset, int limit){
+        TypedQuery<Patient> q = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels) >=30 and doctor is null",Patient.class);
+        int maxItems = q.getMaxResults();
+        return new PaginationTuple<>(q
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList(),
+                offset,maxItems);
+    }
+    public List<Patient> getPendingForConsulation(int offset,int limit){
+        List<Consultation> consults = em.createQuery("select c from Doctor d inner join d.consultations c where doctor is ?1 group by c.patient having max(c.date) = c.date",Consultation.class)
+                .setParameter(1,doctor)
+                .getResultList();
+        return consults.stream().filter(s-> s.getDate().plusMonths(1).compareTo(LocalDate.now()) < 0).map(Consultation::getPatient).collect(Collectors.toList());
     }
 
     public Optional<Patient> getPatient(int id){
         return Optional.ofNullable(
-                (Patient)em.createQuery("from Patient where doctor is ?1").setParameter(1,doctor).getSingleResult());
+                em.createQuery("from Patient where doctor is ?1",Patient.class).setParameter(1,doctor).getSingleResult());
     }
 
     public List<CarbRecord> getCarbs(Patient p, int offset, int limit){

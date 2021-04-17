@@ -17,7 +17,7 @@ public class Consultation {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = true)
     private Doctor doctor;
 
     @Column(nullable = false)

@@ -24,7 +24,6 @@ public class Patient extends User{
     private List<CarbRecord> carbs;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.EXTRA)
     private List<GlucoseRecord> glucoseLevels;
 
     @Override
