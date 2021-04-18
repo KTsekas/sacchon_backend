@@ -34,6 +34,10 @@ public class ConsultationService extends BaseService {
                 offset,limit);
     }
 
+    public Optional<Consultation> get(int id){
+        return Optional.ofNullable(em.find(Consultation.class,id));
+    }
+
     public Optional<Consultation> save(Consultation c,Doctor d,int id) {
         Patient p = em.find(Patient.class,id);
         if ( p == null || !p.getDoctor().equals(d))

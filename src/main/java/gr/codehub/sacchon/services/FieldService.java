@@ -20,7 +20,7 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
     }
 
     public Optional<R> get(int id) {
-        return Optional.of(em.find(getRClass(), id));
+        return Optional.ofNullable(em.find(getRClass(), id));
     }
 
     public boolean del(int id) {

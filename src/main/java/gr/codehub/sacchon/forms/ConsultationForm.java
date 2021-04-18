@@ -11,7 +11,8 @@ import java.time.LocalDate;
 
 @Data
 public class ConsultationForm {
-    int id;
+    public static final int MISSING_VALUE=-1;
+    int id=MISSING_VALUE;
     String text;
     @JsonSerialize( using = LocalDateSerializer.class)
     @JsonDeserialize( using = LocalDateDeserializer.class)
@@ -23,5 +24,6 @@ public class ConsultationForm {
     public Consultation update(Consultation c){
         c.setDate(date);
         c.setConsultationText(text);
+        return c;
     }
 }
