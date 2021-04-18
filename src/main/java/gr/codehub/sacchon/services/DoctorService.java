@@ -55,12 +55,6 @@ public class DoctorService extends BaseService{
                 .getResultList(),
                 offset,maxItems);
     }
-    public List<Patient> getPendingForConsulation(int offset,int limit){
-        List<Consultation> consults = em.createQuery("select c from Doctor d inner join d.consultations c where doctor is ?1 group by c.patient having max(c.date) = c.date",Consultation.class)
-                .setParameter(1,doctor)
-                .getResultList();
-        return consults.stream().filter(s-> s.getDate().plusMonths(1).compareTo(LocalDate.now()) < 0).map(Consultation::getPatient).collect(Collectors.toList());
-    }
 
     public Optional<Patient> getPatient(int id){
         return Optional.ofNullable(

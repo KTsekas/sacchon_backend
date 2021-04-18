@@ -13,7 +13,6 @@ import org.restlet.data.Status;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
-
 import java.util.stream.Collectors;
 
 public class PatientPickerResource extends AuthResource {
