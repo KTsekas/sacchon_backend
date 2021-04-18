@@ -2,6 +2,7 @@ package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.PatientField;
 import gr.codehub.sacchon.model.Patient;
+import gr.codehub.sacchon.util.PaginationTuple;
 
 import javax.persistence.NoResultException;
 import java.time.LocalDate;
@@ -62,12 +63,9 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
             return Optional.empty();
         }
     }
-    public List<R> getList(int offset, int limit) {
-        return em.createQuery("from " +getName() +" where patient=?1",getRClass())
-                .setParameter(1,patient)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
+    public PaginationTuple<R> getList(int offset, int limit) {
+        return getPagination(em.createQuery("from " +getName() +" where patient=?1",getRClass())
+                .setParameter(1,patient),offset,limit);
     }
 
 
@@ -83,14 +81,14 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
     }
 
 
-    public long getMaxItems() {
-        try{
-            return em.createQuery("select count(*) from " + getName()+ " g where g.patient is ?1",Long.class)
-                    .setParameter(1,patient)
-                    .getSingleResult();
-        }catch(NoResultException ex){
-
-            return 0;
-        }
-    }
+//    public long getMaxItems() {
+//        try{
+//            return em.createQuery("select count(*) from " + getName()+ " g where g.patient is ?1",Long.class)
+//                    .setParameter(1,patient)
+//                    .getSingleResult();
+//        }catch(NoResultException ex){
+//
+//            return 0;
+//        }
+//    }
 }
