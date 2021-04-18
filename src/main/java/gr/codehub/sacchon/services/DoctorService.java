@@ -3,29 +3,27 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.*;
 import gr.codehub.sacchon.util.PaginationTuple;
 
-import javax.persistence.TypedQuery;
+import javax.persistence.NamedQuery;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+@NamedQuery(
+        name ="doctor_inactive",
+        query="select d doctor d inner join d.consultations c " +
+                "where c.date between ?1 and ?2 and " +
+                "group by d" +
+                "having size(d.carbs) = 0"
+)
 
 public class DoctorService extends BaseService{
-    private final Doctor doctor;
 
-    public DoctorService(Doctor doctor){
-        this(doctor,true);
-    }
-    public DoctorService(Doctor doctor,boolean allocManager) {
-        super(allocManager);
-        this.doctor=doctor;
-    }
-
-    public Optional<Patient> pickPatient(int id){
+    public Optional<Patient> pickPatient(Doctor d,int id){
         Patient p = em.find(Patient.class,id);
         try{
             if ( p.getDoctor() != null )
                 return Optional.empty();
-            p.setDoctor(doctor);
+            p.setDoctor(d);
             em.getTransaction().begin();
             em.persist(p);
             em.getTransaction().commit();
@@ -33,32 +31,6 @@ public class DoctorService extends BaseService{
         }catch(Exception ex) {
             return Optional.empty();
         }
-    }
-
-    public PaginationTuple<Patient> getPatients(int offset, int limit) {
-        TypedQuery<Patient> q = em.createQuery("from Patient where doctor=?1",Patient.class)
-            .setParameter(1,doctor);
-        int maxItems = q.getMaxResults();
-        return new PaginationTuple<>(
-                q.setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList(),
-                offset,maxItems);
-    }
-    // hard query
-    public PaginationTuple<Patient> getFreePatients(int offset, int limit){
-        TypedQuery<Patient> q = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels) >=30 and doctor is null",Patient.class);
-        int maxItems = q.getMaxResults();
-        return new PaginationTuple<>(q
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList(),
-                offset,maxItems);
-    }
-
-    public Optional<Patient> getPatient(int id){
-        return Optional.ofNullable(
-                em.createQuery("from Patient where doctor is ?1",Patient.class).setParameter(1,doctor).getSingleResult());
     }
 
     public List<CarbRecord> getCarbs(Patient p, int offset, int limit){
@@ -72,5 +44,13 @@ public class DoctorService extends BaseService{
         List<GlucoseRecord> items = carb.getList(offset,limit);
         carb.close();
         return items;
+    }
+
+    public PaginationTuple<Doctor> getInactiveDoctor(LocalDate start, LocalDate end,int offset,int limit){
+        return getPagination(em.createNamedQuery("doctor_inactive",Doctor.class)
+                .setParameter(1,start)
+                .setParameter(2,start),
+                offset,limit);
+
     }
 }
