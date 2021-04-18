@@ -23,14 +23,14 @@ public abstract class PatientFieldResource<T extends PatientField, R> extends Au
 
 
 
-    abstract FieldService<T> getService();
+    abstract FieldService<T> getService(Patient p);
     abstract R getRepresentation(T item);
 
     @Get("json")
     public PaginationListRepresentation<R> getCarbs(){
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
-        int id = ResourceHelper.parseIntOrDef("limit", -1, this);
+        int id = ResourceHelper.parseIntOrDef("id", -1, this);
         if ( id == -1){
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"No patient id specified");
             return null;
@@ -42,9 +42,8 @@ public abstract class PatientFieldResource<T extends PatientField, R> extends Au
             return null;
         }
         srv.close();
-        FieldService<T> nSrv = getService();
+        FieldService<T> nSrv = getService(patient.get());
         PaginationTuple<T> items = nSrv.getList(offset,limit);
-        return new PaginationListRepresentation<>(offset,items.getMaxItems(),
-                items.getItems().stream().map(this::getRepresentation).collect(Collectors.toList()));
+        return new PaginationListRepresentation<>(items.getItems().stream().map(this::getRepresentation).collect(Collectors.toList()),offset);
     }
 }

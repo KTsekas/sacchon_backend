@@ -10,6 +10,4 @@ import java.util.List;
 public class PaginationTuple<T> {
      List<T> items;
      int offset;
-     int maxItems;
-
 }

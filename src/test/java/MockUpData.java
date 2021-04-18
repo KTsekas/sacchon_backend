@@ -41,27 +41,27 @@ public class MockUpData {
 //                "select p from Patient p inner join p.carbs c" +
 //                "inner join p.glucoseLevels g" +
 //                        " group by p having count(c) >30").getResultList();
-//        List<Patient> p = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels)>= 30 and doctor is null",Patient.class).getResultList();
-//        List<Patient> k = em.createQuery("from Patient p where size(p.carbs) >=30 and doctor is null",Patient.class).getResultList();
-//        List<Patient> l = em.createQuery("from Patient p where size(p.glucoseLevels)>= 30 and doctor is null",Patient.class).getResultList();
+        List<Patient> p = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels)>= 30 and doctor is null",Patient.class).getResultList();
+        List<Patient> k = em.createQuery("from Patient p where size(p.carbs) >=30 and doctor is not null",Patient.class).getResultList();
+        List<Patient> l = em.createQuery("from Patient p where size(p.glucoseLevels)>= 30 and doctor is not null",Patient.class).getResultList();
 //        List<Patient> s = em.createQuery("from Patient",Patient.class).getResultList();
-//        System.out.println(p.size());
-//        System.out.println(k.size());
-//        System.out.println(l.size());
+        System.out.println(p.size());
+        System.out.println(k.size());
+        System.out.println(l.size());
 //        System.out.println(s.size());
-        Doctor doc = em.createQuery("from Doctor where id=118",Doctor.class).getSingleResult();
-        System.out.println(doc);
-        doc.getPatient().forEach(System.out::println);
-        doc.getConsultations().forEach(System.out::println);
-        System.out.println("-----------------------");
-        List<Consultation> expired = em.createQuery("select c from Doctor d inner join d.consultations c where c.doctor is ?1 group by c.patient having max(c.date) = c.date",Consultation.class)
-                .setParameter(1,doc)
-                .getResultList();
-        expired.forEach(s -> {
-            if (s.getDate().plusMonths(1).compareTo(LocalDate.now()) < 0)
-                System.out.println(s);
-                });
-        List<Consultation> consult;
+//        Doctor doc = em.createQuery("from Doctor where id=118",Doctor.class).getSingleResult();
+//        System.out.println(doc);
+//        doc.getPatient().forEach(System.out::println);
+//        doc.getConsultations().forEach(System.out::println);
+//        System.out.println("-----------------------");
+//        List<Consultation> expired = em.createQuery("select c from Doctor d inner join d.consultations c where c.doctor is ?1 group by c.patient having max(c.date) = c.date",Consultation.class)
+//                .setParameter(1,doc)
+//                .getResultList();
+//        expired.forEach(s -> {
+//            if (s.getDate().plusMonths(1).compareTo(LocalDate.now()) < 0)
+//                System.out.println(s);
+//                });
+//        List<Consultation> consult;
 
     }
     private static GlucoseRecord createGlucose(Patient p){

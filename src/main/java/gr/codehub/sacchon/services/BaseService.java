@@ -29,6 +29,6 @@ public class BaseService {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList(),
-                offset, maxItems);
+                offset);
     }
 }

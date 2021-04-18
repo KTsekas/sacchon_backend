@@ -8,14 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@NamedQuery(
-        name ="doctor_inactive",
-        query="select d doctor d inner join d.consultations c " +
-                "where c.date between ?1 and ?2 and " +
-                "group by d" +
-                "having size(d.carbs) = 0"
-)
-
 public class DoctorService extends BaseService{
 
     public Optional<Patient> pickPatient(Doctor d,int id){
@@ -31,19 +23,6 @@ public class DoctorService extends BaseService{
         }catch(Exception ex) {
             return Optional.empty();
         }
-    }
-
-    public List<CarbRecord> getCarbs(Patient p, int offset, int limit){
-        CarbService carb = new CarbService(p);
-        List<CarbRecord> items = carb.getList(offset,limit);
-        carb.close();
-        return items;
-    }
-    public List<GlucoseRecord> getGlucoseLevels(Patient p,int offset, int limit){
-        GlucoseService carb = new GlucoseService(p);
-        List<GlucoseRecord> items = carb.getList(offset,limit);
-        carb.close();
-        return items;
     }
 
     public PaginationTuple<Doctor> getInactiveDoctor(LocalDate start, LocalDate end,int offset,int limit){

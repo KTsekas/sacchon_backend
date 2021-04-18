@@ -8,6 +8,16 @@ import java.util.Date;
 
 @Data
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "consult.pending",
+                query = "select c from Doctor d inner join d.consultations c where c.doctor is ?1 group by c.patient having max(c.date) = c.date"
+        ),
+        @NamedQuery(
+                name = "consult.pending.all",
+                query = "select c from Doctor d inner join d.consultations c group by c.patient having max(c.date) = c.date"
+        )
+})
 public class Consultation {
 
     @Id

@@ -10,6 +10,13 @@ import java.util.List;
 @Data
 @Entity
 @DiscriminatorValue(UserRole.DOCTOR)
+@NamedQuery(
+        name ="doctor.inactive",
+        query="select d from Doctor d inner join d.consultations c " +
+                "where c.date between ?1 and ?2 " +
+                "group by d " +
+                "having size(d.consultations) = 0"
+)
 public class Doctor extends User {
 
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.LAZY)

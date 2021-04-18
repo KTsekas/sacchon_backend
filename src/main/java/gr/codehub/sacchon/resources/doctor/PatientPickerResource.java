@@ -26,9 +26,8 @@ public class PatientPickerResource extends AuthResource {
         setService(srv);
         PaginationTuple<Patient> result = srv.getFreePatients(offset,limit);
         return new PaginationListRepresentation<>(
-                result.getOffset(),
-                result.getMaxItems(),
-                result.getItems().stream().map(PatientInfoRepresentation::new).collect(Collectors.toList()));
+                result.getItems().stream().map(PatientInfoRepresentation::new).collect(Collectors.toList()),
+                offset);
     }
     @Post("json")
     public void pickPatient(SingleValueForm<Integer> frm){

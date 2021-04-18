@@ -12,8 +12,8 @@ import gr.codehub.sacchon.services.GlucoseService;
 public class PatientGlucoseResource extends PatientFieldResource<GlucoseRecord, GlucoseRepresentation> {
 
     @Override
-    FieldService<GlucoseRecord> getService() {
-        GlucoseService srv = new GlucoseService((Patient)getUser());
+    FieldService<GlucoseRecord> getService(Patient p) {
+        GlucoseService srv = new GlucoseService(p);
         setService(srv);
         return srv;
     }

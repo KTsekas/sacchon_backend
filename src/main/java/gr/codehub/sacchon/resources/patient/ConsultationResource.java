@@ -24,8 +24,9 @@ public class ConsultationResource extends AuthResource {
         ConsultationService srv = new ConsultationService();
         setService(srv);
         PaginationTuple<Consultation> items = srv.get((Patient)getUser(),offset,limit);
-        return new PaginationListRepresentation<>(offset,items.getMaxItems(),
-                items.getItems().stream().map(ConsultationRepresentation::new).collect(Collectors.toList()));
+        return new PaginationListRepresentation<>(
+                items.getItems().stream().map(ConsultationRepresentation::new).collect(Collectors.toList()),
+                offset);
     }
 
 }

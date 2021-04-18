@@ -22,7 +22,11 @@ public class ConsultationResource extends AuthResource {
 
     @Get("json")
     public PaginationListRepresentation<ConsultationRepresentation> getConsultations() {
-        int id = ResourceHelper.parseIntAttributeOrFail("id", this);
+        int id = ResourceHelper.parseIntOrDef("id", -1, this);
+        if ( id == -1){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"No id provided in query parameters");
+            return null;
+        }
         Doctor doc = (Doctor) getUser();
         Optional<Patient> patient = doc.getPatient().stream().filter(p -> p.getId() == id).findFirst();
         if (patient.isEmpty()) {
@@ -33,8 +37,9 @@ public class ConsultationResource extends AuthResource {
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         ConsultationService srv = new ConsultationService();
         PaginationTuple<Consultation> items = srv.get(patient.get(), offset, limit);
-        return new PaginationListRepresentation<>(offset, items.getMaxItems(),
-                items.getItems().stream().map(ConsultationRepresentation::new).collect(Collectors.toList()));
+        return new PaginationListRepresentation<>(
+                items.getItems().stream().map(ConsultationRepresentation::new).collect(Collectors.toList()),
+                offset);
     }
 
     @Post("json")

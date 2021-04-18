@@ -9,8 +9,8 @@ import gr.codehub.sacchon.services.FieldService;
 public class PatientCarbResource extends PatientFieldResource<CarbRecord,CarbRepresentation> {
 
     @Override
-    FieldService<CarbRecord> getService() {
-        CarbService srv = new CarbService((Patient)getUser());
+    FieldService<CarbRecord> getService(Patient p) {
+        CarbService srv = new CarbService(p);
         setService(srv);
         return srv;
     }

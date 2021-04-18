@@ -26,8 +26,9 @@ public abstract class FieldResource<T extends PatientField,F extends FieldForm<T
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         FieldService<T> srv= getService();
         PaginationTuple<T> items = srv.getList(offset,limit);
-        return new PaginationListRepresentation<>(offset,items.getMaxItems(),
-                items.getItems().stream().map(this::getRepresentation).collect(Collectors.toList()));
+        return new PaginationListRepresentation<>(
+                items.getItems().stream().map(this::getRepresentation).collect(Collectors.toList()),
+                offset);
     }
 
     @Post("json")
