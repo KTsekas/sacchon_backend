@@ -24,11 +24,4 @@ public class PatientPickerResource extends AuthResource {
         setService(srv);
         return srv.getFreePatients(offset,limit).stream().map(PatientInfoRepresentation::new).collect(Collectors.toList());
     }
-    @Post("json")
-    public void pickPatient(SingleValueForm<Integer> frm){
-        DoctorService srv = new DoctorService();
-        setService(srv);
-        if( srv.pickPatient((Doctor)getUser(),frm.getValue()).isEmpty() )
-            setStatus(Status.CLIENT_ERROR_EXPECTATION_FAILED,"Unable to assign doctor");
-    }
 }

@@ -19,6 +19,9 @@ public class ConsultationForm {
     @JsonDeserialize( using = LocalDateDeserializer.class)
     LocalDate date;
 
+    public boolean isInValid(){
+        return id == MISSING_VALUE;
+    }
 
     public Consultation create(){
         return update(new Consultation());
@@ -26,6 +29,7 @@ public class ConsultationForm {
     public Consultation update(Consultation c){
         c.setDate(date);
         c.setConsultationText(text);
+        c.setExpirationDate(date.plusMonths(1));
         return c;
     }
 }

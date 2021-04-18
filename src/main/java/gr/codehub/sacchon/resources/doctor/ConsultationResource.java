@@ -7,6 +7,7 @@ import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.representations.ConsultationRepresentation;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.ConsultationService;
+import gr.codehub.sacchon.services.PatientService;
 import gr.codehub.sacchon.util.ResourceHelper;
 import org.restlet.data.Status;
 import org.restlet.resource.Get;
@@ -45,11 +46,31 @@ public class ConsultationResource extends AuthResource {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
             return;
         }
+        if(frm.isInValid()){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid data from body");
+            return;
+        }
         Consultation consultation = frm.create();
         ConsultationService srv = new ConsultationService();
         setService(srv);
-        if (srv.save(consultation, (Doctor) getUser(), frm.getId()).isEmpty())
-            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save in database");
+        PatientService pSrv = new PatientService();
+        Optional<Patient> p = pSrv.getPatient(frm.getId());
+        pSrv.close();
+        if ( p.isEmpty() ){
+           setStatus(Status.CLIENT_ERROR_NOT_FOUND,"No patient with that id");
+           return;
+        }
+        Doctor d = (Doctor)getUser();
+        if ( p.get().getDoctor() == null )
+            p.get().setDoctor(d);
+        else if( !p.get().getDoctor().equals(d)){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"Patient is already consulted");
+            return;
+        }
+        consultation.setDoctor(d);
+        consultation.setPatient(p.get());
+        if (srv.save(consultation).isEmpty())
+            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save consultation in database");
     }
 
     @Put("json")
@@ -58,8 +79,8 @@ public class ConsultationResource extends AuthResource {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "This request needs a body");
             return;
         }
-        if (frm.getId() == ConsultationForm.MISSING_VALUE) {
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Missing id from body");
+        if (frm.isInValid()){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid data from body");
             return;
         }
         ConsultationService srv = new ConsultationService();
@@ -69,6 +90,6 @@ public class ConsultationResource extends AuthResource {
             return;
         }
         if ( srv.update(frm.update(consultation.get())).isEmpty() )
-            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save in database");
+            setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save consultation in database");
     }
 }

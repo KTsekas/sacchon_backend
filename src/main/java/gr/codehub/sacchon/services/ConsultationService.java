@@ -38,13 +38,8 @@ public class ConsultationService extends BaseService {
         return Optional.ofNullable(em.find(Consultation.class,id));
     }
 
-    public Optional<Consultation> save(Consultation c,Doctor d,int id) {
-        Patient p = em.find(Patient.class,id);
-        if ( p == null || !p.getDoctor().equals(d))
-            return Optional.empty();
+    public Optional<Consultation> save(Consultation c) {
         try {
-            c.setPatient(p);
-            c.setDoctor(d);
             em.getTransaction().begin();
             em.persist(c);
             em.getTransaction().commit();
