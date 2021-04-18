@@ -5,12 +5,8 @@ import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.util.PaginationTuple;
 
-import javax.persistence.NamedQuery;
-import javax.persistence.TypedQuery;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ConsultationService extends BaseService {
 
@@ -38,18 +34,31 @@ public class ConsultationService extends BaseService {
                 offset,limit);
     }
 
-    public Optional<Consultation> save(Consultation p) {
+    public Optional<Consultation> save(Consultation c,Doctor d,int id) {
+        Patient p = em.find(Patient.class,id);
+        if ( p == null || !p.getDoctor().equals(d))
+            return Optional.empty();
         try {
+            c.setPatient(p);
+            c.setDoctor(d);
             em.getTransaction().begin();
-            em.persist(p);
+            em.persist(c);
             em.getTransaction().commit();
-            return Optional.of(p);
+            return Optional.of(c);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Optional.empty();
     }
-    public Optional<Consultation> update(Consultation p) {
-        return save(p);
+    public Optional<Consultation> update(Consultation c) {
+        try {
+            em.getTransaction().begin();
+            em.persist(c);
+            em.getTransaction().commit();
+            return Optional.of(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

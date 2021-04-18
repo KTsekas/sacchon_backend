@@ -6,6 +6,7 @@ import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.util.PaginationTuple;
 
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
