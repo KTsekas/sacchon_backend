@@ -2,9 +2,7 @@ package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.PatientField;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.util.PaginationTuple;
 
-import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -63,8 +61,8 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
             return Optional.empty();
         }
     }
-    public PaginationTuple<R> getList(int offset, int limit) {
-        return getPagination(em.createQuery("from " +getName() +" where patient=?1",getRClass())
+    public List<R> getList(int offset, int limit) {
+        return getSubList(em.createQuery("from " +getName() +" where patient=?1",getRClass())
                 .setParameter(1,patient),offset,limit);
     }
 

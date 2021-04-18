@@ -2,18 +2,13 @@ package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.representations.SingleValueRepresentation;
-import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.resources.DateRangeResource;
 import gr.codehub.sacchon.services.CarbService;
 import gr.codehub.sacchon.services.GlucoseService;
-import net.bytebuddy.asm.Advice;
 import org.restlet.data.Status;
 import org.restlet.resource.Get;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
 public class AvgResource extends DateRangeResource {
 

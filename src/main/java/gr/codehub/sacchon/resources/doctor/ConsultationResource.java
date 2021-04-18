@@ -5,23 +5,22 @@ import gr.codehub.sacchon.model.Consultation;
 import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.representations.ConsultationRepresentation;
-import gr.codehub.sacchon.representations.PaginationListRepresentation;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.ConsultationService;
-import gr.codehub.sacchon.util.PaginationTuple;
 import gr.codehub.sacchon.util.ResourceHelper;
 import org.restlet.data.Status;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ConsultationResource extends AuthResource {
 
     @Get("json")
-    public PaginationListRepresentation<ConsultationRepresentation> getConsultations() {
+    public List<ConsultationRepresentation> getConsultations() {
         int id = ResourceHelper.parseIntOrDef("id", -1, this);
         if ( id == -1){
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"No id provided in query parameters");
@@ -36,10 +35,8 @@ public class ConsultationResource extends AuthResource {
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         ConsultationService srv = new ConsultationService();
-        PaginationTuple<Consultation> items = srv.get(patient.get(), offset, limit);
-        return new PaginationListRepresentation<>(
-                items.getItems().stream().map(ConsultationRepresentation::new).collect(Collectors.toList()),
-                offset);
+        setService(srv);
+        return srv.get(patient.get(), offset, limit).stream().map(ConsultationRepresentation::new).collect(Collectors.toList());
     }
 
     @Post("json")

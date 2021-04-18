@@ -1,18 +1,12 @@
 import gr.codehub.sacchon.model.*;
-import gr.codehub.sacchon.services.CarbService;
-import gr.codehub.sacchon.services.DoctorService;
-import gr.codehub.sacchon.services.GlucoseService;
 import gr.codehub.sacchon.services.UserRepository;
 import gr.codehub.sacchon.util.JpaUtil;
-import net.bytebuddy.asm.Advice;
 
 import javax.persistence.EntityManager;
-import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class MockUpData {
     static Random rand = new Random();
@@ -41,13 +35,30 @@ public class MockUpData {
 //                "select p from Patient p inner join p.carbs c" +
 //                "inner join p.glucoseLevels g" +
 //                        " group by p having count(c) >30").getResultList();
-        List<Patient> p = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels)>= 30 and doctor is null",Patient.class).getResultList();
-        List<Patient> k = em.createQuery("from Patient p where size(p.carbs) >=30 and doctor is not null",Patient.class).getResultList();
-        List<Patient> l = em.createQuery("from Patient p where size(p.glucoseLevels)>= 30 and doctor is not null",Patient.class).getResultList();
-//        List<Patient> s = em.createQuery("from Patient",Patient.class).getResultList();
-        System.out.println(p.size());
-        System.out.println(k.size());
-        System.out.println(l.size());
+//        List<Patient> p = em.createQuery("from Patient p where size(p.carbs) >=30 and size(p.glucoseLevels)>= 30 and doctor is null",Patient.class).getResultList();
+//        List<Patient> k = em.createQuery("from Patient p where size(p.carbs) >=30 and doctor is not null",Patient.class).getResultList();
+//        List<Patient> l = em.createQuery("from Patient p where size(p.glucoseLevels)>= 30 and doctor is not null",Patient.class).getResultList();
+////        List<Patient> s = em.createQuery("from Patient",Patient.class).getResultList();
+//        System.out.println(p.size());
+//        System.out.println(k.size());
+//        System.out.println(l.size())
+//        D;
+
+        Doctor d = (Doctor)em.find(User.class,135);
+        System.out.println(d);
+        String q2= "select p from Patient p left join p.consultations c " +
+                "where p.doctor is null or p.doctor is ?1 group by p "+
+                "having MAX(c.expirationDate) > ?2 or (MAX(c.expirationDate) is null and size(p.carbs) >= 30 and size(p.glucoseLevels) >=30)";
+        String q3= "select p from Patient p left join p.consultations c " +
+                "where (p.doctor is null) or (p.doctor is ?1) group by p "+
+                "having MAX(c.expirationDate) >= ?2";
+        System.out.println(LocalDate.now());
+        List<Patient> date = em.createQuery(q2,Patient.class)
+                .setParameter(1,d)
+                .setParameter(2,LocalDate.now())
+                .getResultList();
+        date.forEach(System.out::println);
+        System.out.println(date.size());
 //        System.out.println(s.size());
 //        Doctor doc = em.createQuery("from Doctor where id=118",Doctor.class).getSingleResult();
 //        System.out.println(doc);

@@ -21,7 +21,7 @@ import java.util.HashSet;
 
 public class AppRouter {
 
-    private Context ctx;
+    private final Context ctx;
 
     public AppRouter(Context ctx) {
         this.ctx = ctx;

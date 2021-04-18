@@ -1,14 +1,11 @@
 package gr.codehub.sacchon.resources;
 
-import lombok.Data;
-import net.bytebuddy.asm.Advice;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
 public class DateRangeResource extends AuthResource {
     LocalDate start;

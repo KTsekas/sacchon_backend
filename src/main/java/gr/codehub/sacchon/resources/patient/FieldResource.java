@@ -1,11 +1,9 @@
 package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.PatientField;
-import gr.codehub.sacchon.representations.PaginationListRepresentation;
 import gr.codehub.sacchon.forms.FieldForm;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.FieldService;
-import gr.codehub.sacchon.util.PaginationTuple;
 import gr.codehub.sacchon.util.ResourceHelper;
 import org.restlet.data.Status;
 import org.restlet.resource.*;
@@ -21,14 +19,11 @@ public abstract class FieldResource<T extends PatientField,F extends FieldForm<T
     abstract R getRepresentation(T item);
 
     @Get("json")
-    public PaginationListRepresentation<R> getList() {
+    public List<R> getList() {
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
         int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         FieldService<T> srv= getService();
-        PaginationTuple<T> items = srv.getList(offset,limit);
-        return new PaginationListRepresentation<>(
-                items.getItems().stream().map(this::getRepresentation).collect(Collectors.toList()),
-                offset);
+        return srv.getList(offset,limit).stream().map(this::getRepresentation).collect(Collectors.toList());
     }
 
     @Post("json")

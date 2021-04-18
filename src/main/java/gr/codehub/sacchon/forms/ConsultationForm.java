@@ -14,9 +14,11 @@ public class ConsultationForm {
     public static final int MISSING_VALUE=-1;
     int id=MISSING_VALUE;
     String text;
+
     @JsonSerialize( using = LocalDateSerializer.class)
     @JsonDeserialize( using = LocalDateDeserializer.class)
     LocalDate date;
+
 
     public Consultation create(){
         return update(new Consultation());

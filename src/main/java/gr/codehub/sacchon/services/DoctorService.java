@@ -1,9 +1,7 @@
 package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.*;
-import gr.codehub.sacchon.util.PaginationTuple;
 
-import javax.persistence.NamedQuery;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +23,8 @@ public class DoctorService extends BaseService{
         }
     }
 
-    public PaginationTuple<Doctor> getInactiveDoctor(LocalDate start, LocalDate end,int offset,int limit){
-        return getPagination(em.createNamedQuery("doctor_inactive",Doctor.class)
+    public List<Doctor> getInactiveDoctor(LocalDate start, LocalDate end, int offset, int limit){
+        return getSubList(em.createNamedQuery("doctor_inactive",Doctor.class)
                 .setParameter(1,start)
                 .setParameter(2,start),
                 offset,limit);

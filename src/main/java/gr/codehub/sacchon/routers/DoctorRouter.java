@@ -16,3 +16,5 @@ public class DoctorRouter extends Router {
         this.attach("/patient",PatientListResource.class);
     }
 }
+
+// /api/patient/carb?id=10

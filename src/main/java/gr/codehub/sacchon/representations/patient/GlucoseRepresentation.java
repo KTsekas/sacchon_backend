@@ -1,15 +1,11 @@
 package gr.codehub.sacchon.representations.patient;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import gr.codehub.sacchon.model.GlucoseRecord;
-import gr.codehub.sacchon.util.LocalDateDeserializer;
 import gr.codehub.sacchon.util.LocalDateSerializer;
-import gr.codehub.sacchon.util.LocalTimeDeserializer;
 import gr.codehub.sacchon.util.LocalTimeSerializer;
 import lombok.Data;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

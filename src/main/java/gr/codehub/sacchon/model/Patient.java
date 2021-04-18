@@ -18,11 +18,12 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "patient.inactive",
-                query = "select p from Patient p inner join p.carbs c inner join p.glucoseLevels g " +
-                        "where c.date between ?1 and ?2 and " +
-                        "g.date between ?1 and ?2 " +
-                        "group by p " +
-                        "having size(p.carbs) = 0 and size(p.glucoseLevels) = 0"
+//                query = "select p from Patient p inner join p.carbs c inner join p.glucoseLevels g " +
+//                        "where c.date between ?1 and ?2 and " +
+//                        "g.date between ?1 and ?2 " +
+//                        "group by p " +
+//                        "having size(p.carbs) = 0 and size(p.glucoseLevels) = 0"
+                query = "from Patient"
         )
 })
 public class Patient extends User {

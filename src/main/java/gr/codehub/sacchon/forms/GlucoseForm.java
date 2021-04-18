@@ -1,17 +1,13 @@
 package gr.codehub.sacchon.forms;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import gr.codehub.sacchon.model.GlucoseRecord;
 import gr.codehub.sacchon.util.LocalDateDeserializer;
 import gr.codehub.sacchon.util.LocalDateSerializer;
 import gr.codehub.sacchon.util.LocalTimeDeserializer;
 import gr.codehub.sacchon.util.LocalTimeSerializer;
 import lombok.Data;
-import net.bytebuddy.asm.Advice;
 
 import java.time.LocalTime;
 import java.time.LocalDate;
