@@ -5,6 +5,8 @@ import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.model.User;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class SignUpForm {
     private String firstName;
@@ -12,6 +14,10 @@ public class SignUpForm {
     private String email;
     private String password;
     private String role;
+
+    public boolean isInvalid(){
+        return firstName == null || lastName == null || email == null || password == null || role == null;
+    }
 
 
     public <T extends User> T createUser(T usr){

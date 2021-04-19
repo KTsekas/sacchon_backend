@@ -31,12 +31,17 @@ public class SignUpResource extends ServerResource {
     public LoginRepresentation doSignUp(SignUpForm frm) {
         // check
         // Role, password and if user already exists ( email )
+        if ( frm.isInvalid() ){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"Invalid info given");
+            return null;
+        }
         if (!UserRole.isValidSignUpRole(frm.getRole())) {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, frm.getRole() + " is not a valid sign up role");
             return null;
         }
         if (!isValidPassword(frm.getPassword())) {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST, "Password not in correct format");
+            return null;
         }
         repo = new UserRepository(JpaUtil.getEntityManager());
         if (!canUseUsername(frm.getEmail())) {
