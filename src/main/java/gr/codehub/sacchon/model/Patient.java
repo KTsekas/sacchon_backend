@@ -27,6 +27,9 @@ import java.util.List;
         )
 })
 public class Patient extends User {
+    public static final String CONSULTATION_STATUS_NEW ="NEW";
+    public static final String CONSULTATION_STATUS_UPDATED ="UPDATED";
+    public static final String CONSULTATION_STATUS_READ ="READ";
 
     @ManyToOne( fetch = FetchType.EAGER)
     private Doctor doctor;
@@ -39,6 +42,8 @@ public class Patient extends User {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<GlucoseRecord> glucoseLevels;
+
+    private String consultationStatus;
 
     @Override
     public String toString() {

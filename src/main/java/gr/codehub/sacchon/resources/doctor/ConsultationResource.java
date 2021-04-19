@@ -68,6 +68,7 @@ public class ConsultationResource extends AuthResource {
         }
         consultation.setDoctor(d);
         consultation.setPatient(p.get());
+        p.get().setConsultationStatus(Patient.CONSULTATION_STATUS_NEW);
         Optional<Consultation> c = srv.save(consultation,p.get());
         if(c.isEmpty())
             setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save consultation in database");
@@ -92,6 +93,7 @@ public class ConsultationResource extends AuthResource {
             setStatus(Status.CLIENT_ERROR_NOT_FOUND,"No consultation found to update");
             return;
         }
+        consultation.get().getPatient().setConsultationStatus(Patient.CONSULTATION_STATUS_UPDATED);
         if ( srv.update(frm.update(consultation.get())).isEmpty() )
             setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save consultation in database");
     }
