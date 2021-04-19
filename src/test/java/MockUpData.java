@@ -22,9 +22,9 @@ public class MockUpData {
         d.setEmail("doctor@gmail.com");
         d.setPassword("mpes");
         Patient p2 = new Patient();
-        p2.setFirstName("doctor");
+        p2.setFirstName("patient");
         p2.setLastName("sarakis");
-        p2.setEmail("doctor@gmail.com");
+        p2.setEmail("patient@gmail.com");
         p2.setPassword("mpes");
 
         UserRepository repo = new UserRepository(JpaUtil.getEntityManager());
@@ -71,7 +71,7 @@ public class MockUpData {
         Doctor d = new Doctor();
         d.setFirstName(f.name().firstName());
         d.setLastName(f.name().lastName());
-        d.setEmail(f.name().username()+"@" + f.name().firstName());
+        d.setEmail(f.name().username() +"@" + f.name().firstName());
         d.setPassword("mpes");
         return d;
     }
