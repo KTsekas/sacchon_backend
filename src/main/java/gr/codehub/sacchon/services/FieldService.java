@@ -62,7 +62,7 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
         }
     }
     public List<R> getList(int offset, int limit) {
-        return getSubList(em.createQuery("from " +getName() +" where patient=?1",getRClass())
+        return getSubList(em.createQuery("from " +getName() +" g where patient = ?1 order by g.date desc",getRClass())
                 .setParameter(1,patient),offset,limit);
     }
 

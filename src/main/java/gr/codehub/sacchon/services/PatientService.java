@@ -3,6 +3,7 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +21,16 @@ public class PatientService extends BaseService {
     }
 
     public Optional<Patient> getPatient(Doctor d, int id) {
-        return Optional.ofNullable(
-                em.createQuery("from Patient p where p.doctor is ?1 and p.id=?2 ", Patient.class)
-                        .setParameter(1, d)
-                        .setParameter(2, id)
-                        .getSingleResult());
+        try {
+            return Optional.ofNullable(
+                    em.createQuery("from Patient p where p.doctor is ?1 or p.doctor is null and p.id=?2", Patient.class)
+                            .setParameter(1, d)
+                            .setParameter(2, id)
+                            .getSingleResult());
+        }
+        catch(NoResultException ex){
+            return Optional.empty();
+        }
     }
     public Optional<Patient> getPatient( int id) {
         return Optional.ofNullable(em.find(Patient.class,id));

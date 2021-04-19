@@ -11,23 +11,23 @@ import java.util.Optional;
 public class ConsultationService extends BaseService {
 
     public List<Consultation> get(Patient p, int offset, int limit) {
-        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 order by c.date ", Consultation.class)
+        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 order by c.date desc ", Consultation.class)
                 .setParameter(1, p),offset,limit);
     }
     public List<Consultation> get(Doctor p, int offset, int limit) {
-        return getSubList(em.createQuery("from Consultation c where c.doctor is ?1 order by c.date ", Consultation.class)
+        return getSubList(em.createQuery("from Consultation c where c.doctor is ?1 order by c.date desc", Consultation.class)
                 .setParameter(1, p),offset,limit);
     }
 
     public List<Consultation> getByDate(Patient p, LocalDate start, LocalDate end, int offset, int limit) {
-        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 where c.date between ?2 and ?3 order by c.date ", Consultation.class)
+        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 where c.date between ?2 and ?3 order by c.date desc", Consultation.class)
                 .setParameter(1, p)
                 .setParameter(2,start)
                 .setParameter(3,end),
                 offset,limit);
     }
     public List<Consultation> getByDate(Doctor p, LocalDate start,LocalDate end ,int offset, int limit) {
-        return getSubList(em.createQuery("from Consultation c where c.doctor is ?1 where c.date between ?2 and ?3 order by c.date ", Consultation.class)
+        return getSubList(em.createQuery("from Consultation c where c.doctor is ?1 where c.date between ?2 and ?3 order by c.date desc", Consultation.class)
                 .setParameter(1, p)
                 .setParameter(2,start)
                 .setParameter(3,end),
