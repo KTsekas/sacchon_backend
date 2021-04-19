@@ -28,7 +28,7 @@ import java.util.List;
 })
 public class Patient extends User {
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER)
     private Doctor doctor;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

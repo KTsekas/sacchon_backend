@@ -55,7 +55,6 @@ public class ConsultationResource extends AuthResource {
         setService(srv);
         PatientService pSrv = new PatientService();
         Optional<Patient> p = pSrv.getPatient(frm.getId());
-        pSrv.close();
         if ( p.isEmpty() ){
            setStatus(Status.CLIENT_ERROR_NOT_FOUND,"No patient with that id");
            return;
@@ -69,8 +68,12 @@ public class ConsultationResource extends AuthResource {
         }
         consultation.setDoctor(d);
         consultation.setPatient(p.get());
-        if (srv.save(consultation).isEmpty())
+        Optional<Consultation> c = srv.save(consultation,p.get());
+        if(c.isEmpty())
             setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to save consultation in database");
+        else
+            System.out.println(c.get());
+        pSrv.close();
     }
 
     @Put("json")

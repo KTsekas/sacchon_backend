@@ -38,9 +38,10 @@ public class ConsultationService extends BaseService {
         return Optional.ofNullable(em.find(Consultation.class,id));
     }
 
-    public Optional<Consultation> save(Consultation c) {
+    public Optional<Consultation> save(Consultation c,Patient p) {
         try {
             em.getTransaction().begin();
+            em.merge(p);
             em.persist(c);
             em.getTransaction().commit();
             return Optional.of(c);

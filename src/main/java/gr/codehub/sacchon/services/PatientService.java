@@ -12,7 +12,7 @@ public class PatientService extends BaseService {
 
 
     public List<Patient> getPatients(Doctor d, int offset, int limit) {
-        return getSubList(em.createQuery("from Patient where doctor=?1", Patient.class).setParameter(1, d), offset, limit);
+        return getSubList(em.createQuery("from Patient p where p.doctor is ?1", Patient.class).setParameter(1, d), offset, limit);
     }
 
     public List<Patient> getFreePatients(int offset, int limit) {
@@ -47,5 +47,17 @@ public class PatientService extends BaseService {
     public List<Patient> getPendingAll(int offset, int limit) {
         return getSubList(em.createNamedQuery("consult.pending.all", Patient.class)
                         .setParameter(1, LocalDate.now()),offset, limit);
+    }
+
+    public Optional<Patient> save(Patient p){
+        try {
+            em.getTransaction().begin();
+            em.persist(p);
+            em.getTransaction().commit();
+            return Optional.of(p);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }
