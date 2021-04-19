@@ -15,6 +15,5 @@ public class PatientInfoRepresentation {
         this.firstName = p.getFirstName();
         this.lastName = p.getLastName();
         this.email=p.getEmail();
-
     }
 }

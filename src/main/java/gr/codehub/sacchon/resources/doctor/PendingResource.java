@@ -1,6 +1,7 @@
 package gr.codehub.sacchon.resources.doctor;
 
 import gr.codehub.sacchon.model.Doctor;
+import gr.codehub.sacchon.model.Patient;
 import gr.codehub.sacchon.representations.doctor.PatientInfoRepresentation;
 import gr.codehub.sacchon.resources.AuthResource;
 import gr.codehub.sacchon.services.PatientService;
