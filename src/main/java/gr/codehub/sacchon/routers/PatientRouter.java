@@ -14,5 +14,6 @@ public class PatientRouter extends Router{
         this.attach("/carb", CarbResource.class);
         this.attach( "/average/{type}",AvgResource.class);
         this.attach("/consultation", ConsultationResource.class);
+        this.attach("/notified",NotifiedResource.class);
     }
 }

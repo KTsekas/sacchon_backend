@@ -1,5 +1,6 @@
 package gr.codehub.sacchon.services;
 
+import gr.codehub.sacchon.model.Consultation;
 import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
 
@@ -65,5 +66,14 @@ public class PatientService extends BaseService {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public boolean notified(Patient p){
+        em.getTransaction().begin();
+        int res =em.createQuery("update Patient p set p.consultationStatus = ?1 where p.id =?2")
+                .setParameter(1, Patient.CONSULTATION_STATUS_READ)
+                .setParameter(2,p.getId()).executeUpdate();
+        em.getTransaction().commit();
+        return res==-1;
     }
 }

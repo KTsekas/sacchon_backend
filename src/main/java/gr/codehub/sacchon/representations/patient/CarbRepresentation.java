@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class CarbRepresentation {
 
     private int id;
-    private double glucoseLevel;
+    private double carb;
 
     @JsonSerialize( using = LocalDateSerializer.class)
     private LocalDate date;
@@ -20,7 +20,7 @@ public class CarbRepresentation {
         if( record == null)
             return;
         this.id = record.getId();
-        this.glucoseLevel=record.getCarbIntake();
+        this.carb=record.getCarbIntake();
         this.date=record.getDate();
     }
 }

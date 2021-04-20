@@ -7,8 +7,9 @@ import lombok.Data;
 public class InfoRepresentation {
     private String firstName;
     private String lastName;
-    private String doctorName;
+    private String doctor;
     private String consultationStatus;
+    private String email;
 
 
     public InfoRepresentation(Patient p){
@@ -17,8 +18,9 @@ public class InfoRepresentation {
         this.firstName=p.getFirstName();
         this.lastName=p.getLastName();
         if ( p.getDoctor() != null )
-            this.doctorName = p.getDoctor().getFullName();
+            this.doctor = p.getDoctor().getFullName();
         if ( p.getConsultationStatus() != null )
             this.consultationStatus=p.getConsultationStatus();
+        this.email=p.getEmail();
     }
 }

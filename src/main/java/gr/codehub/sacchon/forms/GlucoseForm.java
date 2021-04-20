@@ -34,7 +34,7 @@ public class GlucoseForm implements FieldForm<GlucoseRecord> {
     public GlucoseRecord update(GlucoseRecord rec) {
         rec.setGlucoseLevel(glucoseLevel);
         rec.setDate(LocalDate.now());
-        rec.setTime(null);
+        rec.setTime(time);
         return rec;
     }
 
@@ -42,6 +42,6 @@ public class GlucoseForm implements FieldForm<GlucoseRecord> {
         return this.id != MISSING_ID_VALUE && isPostValid();
     }
     public boolean isPostValid() {
-        return true;
+        return date != null && time != null;
     }
 }

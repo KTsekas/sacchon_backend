@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class GlucoseRepresentation {
 
     private int id;
-    private double glucoseLevel;
+    private double glucose;
     @JsonSerialize( using = LocalDateSerializer.class)
     private LocalDate date;
     @JsonSerialize( using = LocalTimeSerializer.class)
@@ -23,7 +23,7 @@ public class GlucoseRepresentation {
         if( rec == null)
             return;
         this.id = rec.getId();
-        this.glucoseLevel=rec.getGlucoseLevel();
+        this.glucose =rec.getGlucoseLevel();
         this.date=rec.getDate();
         this.time = rec.getTime();
     }
