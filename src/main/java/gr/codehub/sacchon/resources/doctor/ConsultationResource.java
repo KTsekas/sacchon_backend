@@ -60,7 +60,6 @@ public class ConsultationResource extends AuthResource {
            return;
         }
         Doctor d = (Doctor)getUser();
-        System.out.println("equality " + p.get().getDoctor().equals(d));
         if ( p.get().getDoctor() == null )
             p.get().setDoctor(d);
         else if ( !p.get().getDoctor().equals(d)){
