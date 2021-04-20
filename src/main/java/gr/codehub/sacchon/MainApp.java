@@ -27,7 +27,7 @@ public class MainApp {
         EntityManager em = JpaUtil.getEntityManager();
         Component c = new Component();
 
-        c.getServers().add(Protocol.HTTP,"localhost", 9000);
+        c.getServers().add(Protocol.HTTP, 9000);
         c.getDefaultHost().attach("/api", new WebApp());
         c.start();
         LOGGER.info("Sample Web API started");
