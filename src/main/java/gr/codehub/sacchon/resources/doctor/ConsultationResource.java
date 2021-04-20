@@ -60,10 +60,12 @@ public class ConsultationResource extends AuthResource {
            return;
         }
         Doctor d = (Doctor)getUser();
+        System.out.println("equality " + p.get().getDoctor().equals(d));
         if ( p.get().getDoctor() == null )
             p.get().setDoctor(d);
-        else if( !p.get().getDoctor().equals(d)){
-            setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"Patient is already consulted");
+        else if ( !p.get().getDoctor().equals(d)){
+//        else if( p.get().getDoctor().getId() != d.getId() ){
+            setStatus(Status.CLIENT_ERROR_BAD_REQUEST,"Patient is already consulted by another doctor");
             return;
         }
         consultation.setDoctor(d);

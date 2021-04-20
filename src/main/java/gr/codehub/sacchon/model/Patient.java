@@ -5,8 +5,8 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @DiscriminatorValue(UserRole.PATIENT)
@@ -48,5 +48,17 @@ public class Patient extends User {
     @Override
     public String toString() {
         return "User{" + super.toString() + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if( o.getClass() != Patient.class)
+            return false;
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

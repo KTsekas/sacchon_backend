@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @DiscriminatorValue(UserRole.DOCTOR)
@@ -19,6 +18,18 @@ import java.util.Objects;
                 "having size(d.consultations) = 0"
 )
 public class Doctor extends User {
+
+    @Override
+    public boolean equals(Object o) {
+        if( o.getClass() != Doctor.class)
+            return false;
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), patient);
+    }
 
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
     List<Consultation> consultations;
