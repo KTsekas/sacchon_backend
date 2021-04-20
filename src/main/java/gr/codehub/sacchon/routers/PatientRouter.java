@@ -9,6 +9,7 @@ public class PatientRouter extends Router{
     public void setupEndPoints(){
         this.attachDefault(InfoResource.class);
         this.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
+        this.attach("/count", FieldCountResource.class);
         this.attach("/glucose", GlucoseResource.class);
         this.attach("/carb", CarbResource.class);
         this.attach( "/average/{type}",AvgResource.class);

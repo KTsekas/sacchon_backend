@@ -1,6 +1,8 @@
 package gr.codehub.sacchon.routers;
 
+import gr.codehub.sacchon.representations.patient.FieldCountRepresentation;
 import gr.codehub.sacchon.resources.doctor.*;
+import gr.codehub.sacchon.resources.patient.FieldCountResource;
 import org.restlet.routing.Router;
 import org.restlet.routing.Template;
 
