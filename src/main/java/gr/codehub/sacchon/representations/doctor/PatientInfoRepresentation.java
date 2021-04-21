@@ -6,14 +6,12 @@ import lombok.Data;
 @Data
 public class PatientInfoRepresentation {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String email;
 
     public PatientInfoRepresentation(Patient p){
         this.id = p.getId();
-        this.firstName = p.getFirstName();
-        this.lastName = p.getLastName();
+        this.fullName=p.getFullName();
         this.email=p.getEmail();
     }
 }

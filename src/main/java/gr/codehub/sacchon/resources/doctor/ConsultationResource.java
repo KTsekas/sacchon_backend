@@ -28,7 +28,8 @@ public class ConsultationResource extends AuthResource {
             return null;
         }
         Doctor doc = (Doctor) getUser();
-        Optional<Patient> patient = doc.getPatient().stream().filter(p -> p.getId() == id).findFirst();
+        PatientService pSrv = new PatientService();
+        Optional<Patient> patient = pSrv.getPatient(doc,id);
         if (patient.isEmpty()) {
             setStatus(Status.CLIENT_ERROR_NOT_FOUND, "No patient associated with this doctor found");
             return null;

@@ -24,7 +24,7 @@ public class PatientService extends BaseService {
     public Optional<Patient> getPatient(Doctor d, int id) {
         try {
             return Optional.ofNullable(
-                    em.createQuery("from Patient p where p.doctor is ?1 or p.doctor is null and p.id=?2", Patient.class)
+                    em.createQuery("from Patient p where (p.doctor is ?1 or p.doctor is null) and p.id=?2", Patient.class)
                             .setParameter(1, d)
                             .setParameter(2, id)
                             .getSingleResult());
