@@ -85,17 +85,21 @@ public class AppRouter {
         AuthRouter auth = new AuthRouter();
         PatientRouter patient = new PatientRouter();
         DoctorRouter doctor = new DoctorRouter();
-
-        Router router = new Router();
-        router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
+        ReporterRouter reporter = new ReporterRouter();
 
         auth.setupEndPoints();
         patient.setupEndPoints();
         doctor.setupEndPoints();
+        reporter.setupEndPoints();
+
+        Router router = new Router();
+        router.setDefaultMatchingMode(Template.MODE_STARTS_WITH);
+
 
         router.attach("/auth", auth);
         router.attach("/patient", getRoleGuard(patient, UserRole.PATIENT));
         router.attach("/doctor", getRoleGuard(doctor, UserRole.DOCTOR));
+        router.attach("/reporter", getRoleGuard(reporter, UserRole.REPORTER));
 
         return createCorsFilter(router);
     }

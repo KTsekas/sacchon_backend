@@ -7,11 +7,13 @@ import lombok.Data;
 public class InfoRepresentation {
     private String firstName;
     private String lastName;
+    private String email;
 
     public InfoRepresentation(Doctor p){
         if( p == null )
             return;
         this.firstName=p.getFirstName();
         this.lastName=p.getLastName();
+        this.email = p.getEmail();
     }
 }

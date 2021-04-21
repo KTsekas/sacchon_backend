@@ -12,9 +12,9 @@ public class ResourceHelper {
             return def;
         }
     }
-    public static int parseIntAttributeOrFail(String name,ServerResource res){
+    public static int parseIntQueryOrFail(String name,ServerResource res){
         try{
-            return Integer.parseInt(res.getAttribute(name));
+            return Integer.parseInt(res.getQueryValue(name));
         }
         catch(NumberFormatException ex){
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,name+ " not provided or invalid format");

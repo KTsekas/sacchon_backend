@@ -19,6 +19,7 @@ public class ConsultationForm {
     @JsonDeserialize( using = LocalDateDeserializer.class)
     LocalDate date;
 
+
     public boolean isInValid(){
         return id == MISSING_VALUE;
     }

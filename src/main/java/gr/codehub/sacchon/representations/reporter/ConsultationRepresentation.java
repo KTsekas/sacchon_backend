@@ -1,4 +1,4 @@
-package gr.codehub.sacchon.representations;
+package gr.codehub.sacchon.representations.reporter;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import gr.codehub.sacchon.model.Consultation;
@@ -16,11 +16,13 @@ public class ConsultationRepresentation {
     LocalDate date;
     @JsonSerialize( using = LocalDateSerializer.class)
     LocalDate expirationDate;
+    String patientName;
 
     public ConsultationRepresentation(Consultation c){
         this.id = c.getId();
         this.consultationText = c.getConsultationText();
         this.date = c.getDate();
         this.expirationDate = c.getExpirationDate();
+        this.patientName = c.getPatient().getFullName();
     }
 }

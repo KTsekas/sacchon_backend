@@ -4,8 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class FieldCountRepresentation {
     int carbs;
     int glucose;
+
+
+    public FieldCountRepresentation(int carbs,int glucose) {
+        this.carbs=carbs;
+        this.glucose=glucose;
+    }
 }

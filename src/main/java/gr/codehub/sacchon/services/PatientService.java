@@ -36,6 +36,13 @@ public class PatientService extends BaseService {
     public Optional<Patient> getPatient( int id) {
         return Optional.ofNullable(em.find(Patient.class,id));
     }
+    public Optional<Patient> getPatient( String email ){
+        try{
+           return Optional.ofNullable(em.createQuery("from Patient where email = ?1",Patient.class).setParameter(1,email).getSingleResult());
+        }catch(NoResultException ex){
+            return Optional.empty();
+        }
+    }
 
     public List<Patient> getInactive(LocalDate start, LocalDate end, int offset, int limit) {
         return getSubList(em.createNamedQuery("patient.inactive", Patient.class)

@@ -61,6 +61,16 @@ public abstract class FieldService<R extends PatientField> extends BaseService {
             return Optional.empty();
         }
     }
+
+    public List<R> getListRange(LocalDate start,LocalDate end,int offset, int limit) {
+        return getSubList(em.createQuery("from " +getName() +" g where patient = ?1 and date between ?2 and ?3 order by g.date desc",getRClass())
+                .setParameter(1,patient)
+                .setParameter(2,start)
+                .setParameter(3,end),offset,limit);
+
+    }
+
+
     public List<R> getList(int offset, int limit) {
         return getSubList(em.createQuery("from " +getName() +" g where patient = ?1 order by g.date desc",getRClass())
                 .setParameter(1,patient),offset,limit);

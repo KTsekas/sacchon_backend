@@ -1,8 +1,8 @@
 package gr.codehub.sacchon.resources.patient;
 
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.representations.patient.FieldCountRepresentation;
 import gr.codehub.sacchon.resources.AuthResource;
+import gr.codehub.sacchon.representations.patient.FieldCountRepresentation;
 import org.restlet.resource.Get;
 
 public class FieldCountResource extends AuthResource {

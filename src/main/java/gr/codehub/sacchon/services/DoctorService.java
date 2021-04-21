@@ -2,23 +2,20 @@ package gr.codehub.sacchon.services;
 
 import gr.codehub.sacchon.model.*;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 public class DoctorService extends BaseService{
 
-    public Optional<Patient> pickPatient(Doctor d,int id){
-        Patient p = em.find(Patient.class,id);
+    public Optional<Doctor> getDoctor( int id) {
+        return Optional.ofNullable(em.find(Doctor.class,id));
+    }
+    public Optional<Doctor> getDoctor( String email ){
         try{
-            if ( p.getDoctor() != null )
-                return Optional.empty();
-            p.setDoctor(d);
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
-            return Optional.of(p);
-        }catch(Exception ex) {
+            return Optional.ofNullable(em.createQuery("from Doctor where email = ?1",Doctor.class).setParameter(1,email).getSingleResult());
+        }catch(NoResultException ex){
             return Optional.empty();
         }
     }
