@@ -18,9 +18,18 @@ import java.time.LocalDate;
         ),
         @NamedQuery(
                 name = "consult.pending.all",
-                query ="select p from Patient p left join p.consultations c " +
-                        "group by p.id "+
-                        "having MAX(c.expirationDate) < ?1 or (MAX(c.expirationDate) is null and size(p.carbs) >= 30 and size(p.glucoseLevels) >=30)"
+                query ="select p.id,p.firstName,p.lastName,MAX(c.expirationDate),MAX(cb.date),MAX(g.date) from Patient p left join p.consultations c " +
+                        "inner join p.carbs cb inner join p.glucoseLevels g "+
+                "group by p "+
+                "having MAX(c.expirationDate) < ?2 or (COUNT(c.expirationDate) = 0 and size(p.carbs) >= 30 and size(p.glucoseLevels) >=30)"
+//                query ="select p.firstName,p.lastName,MAX(c.expirationDate),MAX(cb.date),MAX(g.date) from Patient p " +
+//                        "inner join p.carbs cb " +
+//                        "inner join p.consultations c " +
+//                        "inner join p.glucoseLevels g where p.id in " +
+//                        "(select p.id from Patient p left join p.consultations c " +
+//                "group by p "+
+//                "having MAX(c.expirationDate) < ?2 or (COUNT(c.expirationDate) = 0 and size(p.carbs) >= 30 and size(p.glucoseLevels) >=30)) group by p.id"
+
         )
 })
 public class Consultation {

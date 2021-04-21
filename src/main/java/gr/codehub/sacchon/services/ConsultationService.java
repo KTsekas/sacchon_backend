@@ -3,6 +3,7 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.Consultation;
 import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
+import gr.codehub.sacchon.representations.reporter.PendingConsultation;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ConsultationService extends BaseService {
     }
 
     public List<Consultation> getByDate(Patient p, LocalDate start, LocalDate end, int offset, int limit) {
-        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 where c.date between ?2 and ?3 order by c.date desc", Consultation.class)
+        return getSubList(em.createQuery("from Consultation c where c.patient is ?1 and c.date between ?2 and ?3 order by c.date desc", Consultation.class)
                 .setParameter(1, p)
                 .setParameter(2,start)
                 .setParameter(3,end),
@@ -33,6 +34,7 @@ public class ConsultationService extends BaseService {
                 .setParameter(3,end),
                 offset,limit);
     }
+
 
     public Optional<Consultation> get(int id){
         return Optional.ofNullable(em.find(Consultation.class,id));
@@ -60,5 +62,9 @@ public class ConsultationService extends BaseService {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+    public List<Object[]> getPendingAll(int offset, int limit) {
+        return getSubList(em.createNamedQuery("consult.pending.all",Object[].class)
+                .setParameter(2, LocalDate.now()),offset, limit);
     }
 }

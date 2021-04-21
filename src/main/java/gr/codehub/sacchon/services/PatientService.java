@@ -58,10 +58,6 @@ public class PatientService extends BaseService {
                 offset, limit);
     }
 
-    public List<Patient> getPendingAll(int offset, int limit) {
-        return getSubList(em.createNamedQuery("consult.pending.all", Patient.class)
-                        .setParameter(1, LocalDate.now()),offset, limit);
-    }
 
     public Optional<Patient> save(Patient p){
         try {

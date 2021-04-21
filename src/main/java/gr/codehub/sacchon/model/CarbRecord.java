@@ -12,7 +12,7 @@ public class CarbRecord implements PatientField {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
     private double carbIntake;
 
