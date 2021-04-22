@@ -18,12 +18,11 @@ import java.util.Objects;
         ),
         @NamedQuery(
                 name = "patient.inactive",
-//                query = "select p from Patient p inner join p.carbs c inner join p.glucoseLevels g " +
-//                        "where c.date between ?1 and ?2 and " +
-//                        "g.date between ?1 and ?2 " +
-//                        "group by p " +
-//                        "having size(p.carbs) = 0 and size(p.glucoseLevels) = 0"
-                query = "from Patient"
+                query = "from Patient where id in (select p.id from Patient p inner join p.carbs c inner join p.glucoseLevels g " +
+                        "where c.date between ?1 and ?2 and " +
+                        "g.date between ?1 and ?2 " +
+                        "group by p " +
+                        "having count(c.id) = 0 and count(g.id) = 0)"
         )
 })
 public class Patient extends User {

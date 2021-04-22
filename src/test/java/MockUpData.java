@@ -60,7 +60,7 @@ public class MockUpData {
     }
     public static void main(String[] args) {
 
-//        mockMe();
+        mockMe();
 //        Patient cl = em.find(Patient.class,10);
 //        System.out.println(cl);
 //        em.remove(cl);
@@ -71,8 +71,8 @@ public class MockUpData {
 //        Doctor d = em.find(Doctor.class,1);
 //        System.out.println(d);
 //        srv.deleteDoctor(d);
-        ConsultationService srv = new ConsultationService();
-        srv.getPendingAll(0,Integer.MAX_VALUE).forEach(System.out::println);
+//        ConsultationService srv = new ConsultationService();
+//        srv.getPendingAll(0,Integer.MAX_VALUE).forEach(System.out::println);
     }
     private static LocalDate randomDate(){
         return LocalDate.now().minusMonths(rand.nextInt(12)+1).minusDays(rand.nextInt(25)+1);

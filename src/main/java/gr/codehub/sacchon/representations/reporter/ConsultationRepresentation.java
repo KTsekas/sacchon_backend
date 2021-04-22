@@ -17,6 +17,7 @@ public class ConsultationRepresentation {
     @JsonSerialize( using = LocalDateSerializer.class)
     LocalDate expirationDate;
     String patientName;
+    String patientEmail;
 
     public ConsultationRepresentation(Consultation c){
         this.id = c.getId();
@@ -24,5 +25,6 @@ public class ConsultationRepresentation {
         this.date = c.getDate();
         this.expirationDate = c.getExpirationDate();
         this.patientName = c.getPatient().getFullName();
+        this.patientEmail = c.getPatient().getEmail();
     }
 }

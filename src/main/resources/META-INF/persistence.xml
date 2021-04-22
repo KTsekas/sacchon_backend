@@ -1,26 +1,3 @@
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-             version="2.1">
-    <persistence-unit name="Persistence" transaction-type="RESOURCE_LOCAL">
-        <!-- Persistence provider -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- Entity classes -->
-
-        <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:mariadb://localhost:3306/sacchon" />
-            <property name="javax.persistence.jdbc.user" value="chris" />
-            <property name="javax.persistence.jdbc.password" value="qwertygr123" />
-
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.show_sql" value="true"/>
-        </properties>
-
-    </persistence-unit>
-</persistence>
 <!--<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"-->
 <!--             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
 <!--             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence-->
@@ -32,14 +9,38 @@
 <!--        &lt;!&ndash; Entity classes &ndash;&gt;-->
 
 <!--        <properties>-->
-<!--            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />-->
-<!--            <property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://localhost;databaseName=sacchon" />-->
-<!--            <property name="javax.persistence.jdbc.user" value="sa" />-->
-<!--            <property name="javax.persistence.jdbc.password" value="Qwerty123!" />-->
-<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>-->
+<!--            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />-->
+<!--            <property name="javax.persistence.jdbc.url"    value="jdbc:mariadb://localhost:3306/sacchon" />-->
+<!--            <property name="javax.persistence.jdbc.user" value="chris" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="qwertygr123" />-->
+
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>-->
 <!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
 <!--            <property name="hibernate.show_sql" value="true"/>-->
 <!--        </properties>-->
 
 <!--    </persistence-unit>-->
 <!--</persistence>-->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+        <persistence-unit name="Persistence" transaction-type="RESOURCE_LOCAL">
+            <!-- Persistence provider -->
+            <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+            <!-- Entity classes -->
+
+
+    <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://1.c9eaksthxoks.eu-central-1.rds.amazonaws.com;databasename=testdb1" />
+            <property name="javax.persistence.jdbc.user" value="admin" />
+            <property name="javax.persistence.jdbc.password" value="adminadmin" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.sqlserver2012dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>

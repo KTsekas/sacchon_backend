@@ -12,10 +12,11 @@ import java.util.Objects;
 @DiscriminatorValue(UserRole.DOCTOR)
 @NamedQuery(
         name ="doctor.inactive",
-        query="select d from Doctor d inner join d.consultations c " +
-                "where c.date between ?1 and ?2 " +
-                "group by d " +
-                "having size(d.consultations) = 0"
+query=""
+//        query="from Doctor where id in (select d.id from Doctor d inner join d.consultations c " +
+//                "where c.date between ?1 and ?2 " +
+//                "group by d " +
+//                "having c.id=null"
 )
 public class Doctor extends User {
 
