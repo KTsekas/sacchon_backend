@@ -14,6 +14,7 @@ public class ReporterRouter extends Router {
         this.attach("/doctor/search", SearchDoctor.class);
         this.attach("/doctor/consults",DoctorConsultationsResource.class);
         this.attach("/doctor/activity",ActivityDoctor.class);
+        this.attach("/patient/pending",ConsultPending.class);
 
         this.attach("/",InfoResource.class);
 

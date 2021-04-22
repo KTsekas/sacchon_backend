@@ -3,7 +3,6 @@ package gr.codehub.sacchon.services;
 import gr.codehub.sacchon.model.Consultation;
 import gr.codehub.sacchon.model.Doctor;
 import gr.codehub.sacchon.model.Patient;
-import gr.codehub.sacchon.representations.reporter.PendingConsultation;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -65,6 +64,6 @@ public class ConsultationService extends BaseService {
     }
     public List<Object[]> getPendingAll(int offset, int limit) {
         return getSubList(em.createNamedQuery("consult.pending.all",Object[].class)
-                .setParameter(2, LocalDate.now()),offset, limit);
+                .setParameter(1, LocalDate.now()),offset,limit);
     }
 }

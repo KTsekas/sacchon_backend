@@ -86,11 +86,19 @@ public class MockUpData {
 //        List<Patient> p2 = em.createQuery("(select p.id from Patient p left join p.glucoseLevels c group by p having count(c)=0)",Patient.class).getResultList();
 //        p1.forEach(System.out::println);
 //        p2.forEach(System.out::println);
-        List<Doctor> d1 = em.createNamedQuery("doctor.inactive",Doctor.class).getResultList();
-//        List<Patient> res = em.createNamedQuery("patient.inactive",Patient.class).getResultList();
-//        res.forEach(System.out::println);
-        d1.forEach(System.out::println);
-
+//        List<Doctor> d1 = em.createNamedQuery("doctor.inactive",Doctor.class).getResultList();
+        List<Patient> res = em.createNamedQuery("patient.inactive",Patient.class)
+                .setParameter(1,LocalDate.of(2022,1,1))
+                .setParameter(2,LocalDate.of(2040,1,1))
+                .getResultList();
+        res.forEach(System.out::println);
+//        d1.forEach(System.out::println);
+//        List<Patient> pl = em.createQuery("from Patient where id not in(select p.id from Patient p left join p.carbs c where c.date between ?1 and ?2 group by p having count(c)>0)",Patient.class)
+//                .setParameter(1,LocalDate.of(2022,1,1))
+//                .setParameter(2,LocalDate.of(2040,1,1))
+//                .getResultList();
+//
+//        pl.forEach(System.out::println);
 
     }
     private static LocalDate randomDate(){

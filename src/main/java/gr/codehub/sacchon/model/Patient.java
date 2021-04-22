@@ -18,8 +18,9 @@ import java.util.List;
                 name = "patient.inactive",
 //                query="from Patient"
                 query = "from Patient p where " +
-                        "not (p in (select p from Patient p inner join p.carbs c where c.date between ?1 and ?2 group by p having count(c)>0) " +
-                        "or p in (select p from Patient p inner join p.glucoseLevels c where c.date between ?1 and ?2 group by p having count(c)>0))"
+                        "id not in (select p.id from Patient p inner join p.carbs c where c.date between ?1 and ?2 group by p having count(c)>0) "+
+                        "and id not in (select p.id from Patient p inner join p.glucoseLevels c where c.date between ?1 and ?2 group by p having count(c)>0)"
+
         )
 })
 public class Patient extends User {
