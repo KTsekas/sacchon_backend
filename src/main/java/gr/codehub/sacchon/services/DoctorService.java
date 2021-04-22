@@ -23,7 +23,7 @@ public class DoctorService extends BaseService{
     public List<Doctor> getInactiveDoctor(LocalDate start, LocalDate end, int offset, int limit){
         return getSubList(em.createNamedQuery("doctor.inactive",Doctor.class)
                 .setParameter(1,start)
-                .setParameter(2,start),
+                .setParameter(2,end),
                 offset,limit);
 
     }

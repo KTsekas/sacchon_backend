@@ -34,10 +34,10 @@
 
     <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://1.c9eaksthxoks.eu-central-1.rds.amazonaws.com;databasename=testdb1" />
+            <property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://database-1.c9eaksthxoks.eu-central-1.rds.amazonaws.com:1433;DatabaseName=sacchon" />
             <property name="javax.persistence.jdbc.user" value="admin" />
             <property name="javax.persistence.jdbc.password" value="adminadmin" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.sqlserver2012dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="true"/>
         </properties>

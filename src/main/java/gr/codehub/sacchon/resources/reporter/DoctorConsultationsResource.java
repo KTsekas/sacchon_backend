@@ -20,7 +20,7 @@ public class DoctorConsultationsResource extends DateRangeResource {
 
         int id = ResourceHelper.parseIntQueryOrFail("id", this);
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
-        int limit = ResourceHelper.parseIntOrDef("limit", 0, this);
+        int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         DoctorService srv = new DoctorService();
         Optional<Doctor> d = srv.getDoctor(id);
         if (d.isEmpty()) {

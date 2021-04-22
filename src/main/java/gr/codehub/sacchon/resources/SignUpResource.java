@@ -53,7 +53,7 @@ public class SignUpResource extends ServerResource {
         if (frm.getRole().equals(UserRole.DOCTOR))
             usr = frm.createDoctor();
         else if ( frm.getRole().equals(UserRole.PATIENT))
-            usr = frm.createDoctor();
+            usr = frm.createPatient();
         usr = repo.save(usr);
         if (usr == null) {
             setStatus(Status.SERVER_ERROR_INTERNAL, "Unable to create account");

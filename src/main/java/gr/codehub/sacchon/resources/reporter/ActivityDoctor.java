@@ -17,7 +17,7 @@ public class ActivityDoctor extends DateRangeResource {
     @Get("json")
     public List<DoctorInfoRepresentation> getInactive(){
         int offset = ResourceHelper.parseIntOrDef("offset", 0, this);
-        int limit = ResourceHelper.parseIntOrDef("limit", 0, this);
+        int limit = ResourceHelper.parseIntOrDef("limit", Integer.MAX_VALUE, this);
         DoctorService srv = new DoctorService();
         setService(srv);
         return srv.getInactiveDoctor(getStart(),getEnd(),offset,limit).stream().map(DoctorInfoRepresentation::new).collect(Collectors.toList());

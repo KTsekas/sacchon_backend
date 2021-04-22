@@ -1,3 +1,5 @@
+package gr.codehub.sacchon;
+
 import gr.codehub.sacchon.model.*;
 import gr.codehub.sacchon.services.*;
 import gr.codehub.sacchon.util.JpaUtil;
@@ -10,6 +12,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import com.github.javafaker.*;
+import gr.codehub.sacchon.util.ResourceHelper;
 
 public class MockUpData {
     static Random rand = new Random();
@@ -60,7 +63,7 @@ public class MockUpData {
     }
     public static void main(String[] args) {
 
-        mockMe();
+//        mockMe();
 //        Patient cl = em.find(Patient.class,10);
 //        System.out.println(cl);
 //        em.remove(cl);
@@ -73,6 +76,22 @@ public class MockUpData {
 //        srv.deleteDoctor(d);
 //        ConsultationService srv = new ConsultationService();
 //        srv.getPendingAll(0,Integer.MAX_VALUE).forEach(System.out::println);
+        EntityManager em = JpaUtil.getEntityManager();
+////        List<Object> res =em.createNativeQuery("SELECT d.id as id FROM users as d left JOIN consultation as c ON d.id = c.doctor_id WHERE d.role='doctor' GROUP BY d.id,c.id having count(c.id) = 0").getResultList();
+////        res.forEach(System.out::println);
+////        System.out.println(res.size());
+//        List<Doctor> res = em.createNamedQuery("doctor.inactive",Doctor.class).getResultList();
+//        System.out.println(res.size());
+//        List<Patient> p1 = em.createQuery("from Patient where id in (select p.id from Patient p left join p.carbs c group by p having count(c)=0)",Patient.class).getResultList();
+//        List<Patient> p2 = em.createQuery("(select p.id from Patient p left join p.glucoseLevels c group by p having count(c)=0)",Patient.class).getResultList();
+//        p1.forEach(System.out::println);
+//        p2.forEach(System.out::println);
+        List<Doctor> d1 = em.createNamedQuery("doctor.inactive",Doctor.class).getResultList();
+//        List<Patient> res = em.createNamedQuery("patient.inactive",Patient.class).getResultList();
+//        res.forEach(System.out::println);
+        d1.forEach(System.out::println);
+
+
     }
     private static LocalDate randomDate(){
         return LocalDate.now().minusMonths(rand.nextInt(12)+1).minusDays(rand.nextInt(25)+1);

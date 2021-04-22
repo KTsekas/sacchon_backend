@@ -29,10 +29,10 @@ public class DateRangeResource extends AuthResource {
     @Override
     protected void doInit() throws ResourceException {
         super.doInit();
-        start = getDateQueryValue("start", LocalDate.of(-9999, 1, 1));
+        start = getDateQueryValue("start", LocalDate.of(1753, 1, 1));
         if (start == null)
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid start date");
-        end = getDateQueryValue("end", LocalDate.of(9999, 1, 1));
+        end = getDateQueryValue("end", LocalDate.of(9999, 12, 31));
         if (end == null)
             throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Invalid end date");
     }
